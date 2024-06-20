@@ -47,7 +47,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: "/",
     component: Layouts,
-    redirect: "/dashboard",
+    redirect: "/data-overview",
     meta: {
       title: "系统首页",
       elIcon: "House",
@@ -55,32 +55,32 @@ export const constantRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "dashboard",
-        component: () => import("@/views/dashboard/index.vue"),
-        name: "Dashboard",
+        path: "data-overview",
+        component: () => import("@/views/dashboard/DataOverview.vue"),
+        name: "DataOverview",
         meta: {
           title: "数据总览",
-          svgIcon: "dashboard",
+          elIcon: "Notification",
           affix: true
         }
       },
       {
-        path: "dashboard",
-        component: () => import("@/views/dashboard/index.vue"),
-        name: "Dashboard",
+        path: "energy-achievement",
+        component: () => import("@/views/dashboard/EnergyAchievement.vue"),
+        name: "EnergyAchievement",
         meta: {
           title: "节能成果",
-          svgIcon: "dashboard",
+          elIcon: "Notebook",
           affix: true
         }
       }
     ]
   },
   {
-    path: "/table",
+    path: "/energy-analysis",
     component: Layouts,
-    redirect: "/table/element-plus",
-    name: "能耗分析",
+    redirect: "/energy-analysis/report",
+    name: "EnergyAnalysis",
     meta: {
       title: "能耗分析",
       elIcon: "PieChart",
@@ -89,9 +89,9 @@ export const constantRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "element-plus",
-        component: () => import("@/views/table/element-plus/index.vue"),
-        name: "能耗分析",
+        path: "report",
+        component: () => import("@/views/energy-analysis/EnergyAnalysisReport.vue"),
+        name: "EnergyAnalysisReport",
         meta: {
           title: "能耗分析",
           elIcon: "Grid",
@@ -101,21 +101,21 @@ export const constantRoutes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: "/table",
+    path: "/energy-efficiency-analysis",
     component: Layouts,
-    redirect: "/table/element-plus",
-    name: "能效分析",
+    redirect: "/energy-efficiency-analysis/efficiency-calendar",
+    name: "EnergyEfficiencyCalendar",
     meta: {
       title: "能效分析",
-      elIcon: "PieChart",
+      elIcon: "Edit",
       affix: true,
       alwaysShow: true
     },
     children: [
       {
-        path: "element-plus",
-        component: () => import("@/views/table/element-plus/index.vue"),
-        name: "能效日历",
+        path: "efficiency-calendar",
+        component: () => import("@/views/energy-efficiency-analysis/EnergyEfficiencyCalendar.vue"),
+        name: "EnergyEfficiencyCalendar",
         meta: {
           title: "能效日历",
           elIcon: "Grid",
@@ -123,22 +123,22 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
       },
       {
-        path: "element-plus",
-        component: () => import("@/views/table/element-plus/index.vue"),
-        name: "负荷比重",
+        path: "load-proportion",
+        component: () => import("@/views/energy-efficiency-analysis/LoadProportion.vue"),
+        name: "LoadProportion",
         meta: {
           title: "负荷比重",
-          elIcon: "Grid",
+          elIcon: "Histogram",
           keepAlive: true
         }
       }
     ]
   },
   {
-    path: "/table",
+    path: "/alarm-maintenance",
     component: Layouts,
-    redirect: "/table/element-plus",
-    name: "报警运维",
+    redirect: "/alarm-maintenance/alarm-maintenance-query",
+    name: "AlarmMaintenance",
     meta: {
       title: "报警运维",
       elIcon: "Warning",
@@ -147,12 +147,56 @@ export const constantRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: "element-plus",
-        component: () => import("@/views/table/element-plus/index.vue"),
-        name: "能耗分析",
+        path: "real-time-alarm",
+        component: () => import("@/views/alarm-maintenance/RealTimeAlarm.vue"),
+        name: "RealTimeAlarm",
+        meta: {
+          title: "实时警报",
+          elIcon: "Coordinate",
+          keepAlive: true
+        }
+      },
+      {
+        path: "alarm-maintenance-query",
+        component: () => import("@/views/alarm-maintenance/AlarmMaintenanceQuery.vue"),
+        name: "AlarmMaintenanceQuery",
         meta: {
           title: "报警查询",
           elIcon: "Bell",
+          keepAlive: true
+        }
+      },
+      {
+        path: "device-ledger",
+        component: () => import("@/views/alarm-maintenance/DeviceLedger.vue"),
+        name: "DeviceLedger",
+        meta: {
+          title: "设备台账",
+          elIcon: "Notebook",
+          keepAlive: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/report-manage",
+    component: Layouts,
+    redirect: "/report-manage/cold-station-log",
+    name: "ReportManage",
+    meta: {
+      title: "报表管理",
+      elIcon: "Management",
+      affix: true,
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: "cold-station-log",
+        component: () => import("@/views/report-manage/ColdStationLog.vue"),
+        name: "ColdStationLog",
+        meta: {
+          title: "冷站日志",
+          elIcon: "DocumentCopy",
           keepAlive: true
         }
       }
