@@ -47,11 +47,16 @@ const echartsOption = {
   },
   xAxis: {
     type: "category",
+    show: true,
     boundaryGap: false,
     data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
   },
   yAxis: {
-    type: "value"
+    name: "能耗",
+    type: "value",
+    axisLine: {
+      show: true
+    }
   },
   series: [
     {
@@ -131,6 +136,9 @@ const resetSearch = () => {
             size="default"
             style="width: 120px; margin-right: 10px"
           />
+          <el-select v-model="searchData.selectObj" placeholder="时间间隔" style="width: 120px; margin-right: 10px">
+            <el-option v-for="item in objectOptions" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
           <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">查询数据</el-button>
           <el-button type="primary" :icon="UploadFilled">导出数据</el-button>
         </div>

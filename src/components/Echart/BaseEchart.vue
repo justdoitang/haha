@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, watch } from "vue"
 import * as echarts from "echarts"
-import useResize from "../utils/resize"
+import useResize from "../../utils/useResize"
 import type { Ref } from "vue"
 
 interface IProps {
@@ -15,7 +15,7 @@ interface IProps {
   height?: string
 }
 
-const props = withDefaults(defineProps<IProps>(), { class: "base-echart", width: "600px", height: "300px" })
+const props = withDefaults(defineProps<IProps>(), { class: "base-echart", width: "1600px", height: "500px" })
 
 const echartRef = ref<HTMLElement | null>(null)
 const echartInstance: Ref<echarts.ECharts | null> = ref(null)
