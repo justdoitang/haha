@@ -4,6 +4,7 @@ import { getTableDataApi } from "@/api/table"
 import { type CreateOrUpdateTableRequestData, type GetTableData } from "@/api/table/types/table"
 import { type FormInstance, type FormRules, ElMessage, ElMessageBox } from "element-plus"
 import { Search, Refresh, CirclePlus, UploadFilled, Delete, Download, RefreshRight } from "@element-plus/icons-vue"
+import BaseEchart from "@/components/Echart/BaseEchart.vue"
 
 defineOptions({
   // 命名当前组件
@@ -142,7 +143,7 @@ const resetSearch = () => {
           </el-tooltip>
         </div>
       </div>
-      <div class="echarts-wrapper"><!-- <v-charts type="bar" :options="echartsOption" /> -->ddd</div>
+      <div class="echarts-wrapper"><base-echart :option="echartsOption" /></div>
       <div class="table-wrapper">
         <el-table :data="tableData" border stripe>
           <!-- <el-table-column type="selection" width="50" align="center" /> -->
