@@ -5,6 +5,7 @@ import { type CreateOrUpdateTableRequestData, type GetTableData } from "@/api/ta
 import { type FormInstance, type FormRules, ElMessage, ElMessageBox } from "element-plus"
 import { Search, Refresh, CirclePlus, UploadFilled, Delete, Download, RefreshRight } from "@element-plus/icons-vue"
 import BaseEchart from "@/components/Echart/BaseEchart.vue"
+import { now } from "lodash-es"
 
 defineOptions({
   // 命名当前组件
@@ -14,8 +15,33 @@ defineOptions({
 const loading = ref<boolean>(false)
 const calendarValue = ref(new Date())
 const searchData = reactive({
-  queryDate: ""
+  queryDate: now()
 })
+
+const resDate = reactive([
+  {
+    date: "2024-06-30",
+    content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
+  },
+  { date: "2024-06-01", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
+  { date: "2024-06-02", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
+  { date: "2024-06-24", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
+  { date: "2024-06-25", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
+  { date: "2024-06-26", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
+  { date: "2024-06-27", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
+  { date: "2024-06-28", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] }
+])
+
+const dealMyDate = (v: any) => {
+  let res: Array<{ e: string; p: string; c: string; m: string }> = []
+  for (let index = 0; index < resDate.length; index++) {
+    if (resDate[index].date == v) {
+      res = resDate[index].content
+      break
+    }
+  }
+  return res
+}
 </script>
 
 <template>
@@ -33,7 +59,7 @@ const searchData = reactive({
           />
           <el-button type="primary" :icon="CirclePlus">查询数据</el-button>
         </div>
-        <el-calendar v-model="calendarValue" style="width: 800px">
+        <el-calendar v-model="searchData.queryDate" style="width: 800px">
           <template #header="{ date }">
             <div>
               <span>{{ date }}</span>
@@ -45,8 +71,26 @@ const searchData = reactive({
               <span>M(冷量单价)</span>
             </div>
           </template>
-        </el-calendar></el-card
-      >
+          <template #date-cell="{ data }">
+            <div class="calendar-item">
+              <div class="calendar-time">
+                {{ data.day.split("-").slice(2).join("") }}
+              </div>
+              <div>
+                <div class="remark-text" v-for="(item, index) in dealMyDate(data.day)" :key="index">
+                  <span>{{ item.e }}</span>
+                  <span>{{ item.p }}</span>
+                  <span>{{ item.c }}</span>
+                  <span>{{ item.m }}</span>
+                  <!-- <span>C:{{ item.c }}</span>
+                  <span>M:{{ item.m }}</span> -->
+                  <!-- E:{{ item.e }} P:{{ item.p }} C:{{ item.c }} M:{{ item.m }} -->
+                </div>
+              </div>
+            </div>
+          </template>
+        </el-calendar>
+      </el-card>
     </div>
     <div class="right-card">
       <el-card class="contrast-card">
@@ -81,6 +125,23 @@ const searchData = reactive({
     span {
       margin-right: 30px;
     }
+  }
+}
+:deep(.el-calendar-day) {
+  height: 100px;
+}
+:deep(.calendar-time) {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+  span {
+    font-size: 10px;
+  }
+}
+.remark-text {
+  span {
+    font-weight: bold;
+    font-size: 10px;
   }
 }
 
