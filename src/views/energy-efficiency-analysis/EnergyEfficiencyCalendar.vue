@@ -23,14 +23,62 @@ const resDate = reactive([
     date: "2024-06-30",
     content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
   },
-  { date: "2024-06-01", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
-  { date: "2024-06-02", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
-  { date: "2024-06-24", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
-  { date: "2024-06-25", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
-  { date: "2024-06-26", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
-  { date: "2024-06-27", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] },
-  { date: "2024-06-28", content: [{ e: "5.65" }, { p: "2366.85.65" }, { c: "2366.85.65" }, { m: "2366.85.65" }] }
+  {
+    date: "2024-06-01",
+    content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
+  },
+  {
+    date: "2024-06-02",
+    content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
+  },
+  {
+    date: "2024-06-24",
+    content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
+  },
+  {
+    date: "2024-06-25",
+    content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
+  },
+  {
+    date: "2024-06-26",
+    content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
+  },
+  {
+    date: "2024-06-27",
+    content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
+  },
+  {
+    date: "2024-06-28",
+    content: [{ e: "E:5.65" }, { p: "P:2366.85.65" }, { c: "C:2366.85.65" }, { m: "M:2366.85.65" }]
+  }
 ])
+
+const echartsOption = {
+  legend: {
+    top: "5%",
+    left: "left",
+    orient: "vertical"
+  },
+  toolbox: {
+    show: true,
+    feature: {
+      mark: { show: true }
+    }
+  },
+  series: [
+    {
+      name: "Nightingale Chart",
+      type: "pie",
+      radius: ["55%", "70%"],
+      data: [
+        { value: 1048, name: "冷机电" },
+        { value: 735, name: "冷冻泵电" },
+        { value: 580, name: "冷却泵电" },
+        { value: 484, name: "冷塔电" }
+      ]
+    }
+  ]
+}
 
 const dealMyDate = (v: any) => {
   let res: Array<{ e: string; p: string; c: string; m: string }> = []
@@ -78,13 +126,10 @@ const dealMyDate = (v: any) => {
               </div>
               <div>
                 <div class="remark-text" v-for="(item, index) in dealMyDate(data.day)" :key="index">
-                  <span>{{ item.e }}</span>
+                  <span class="e-span-color">{{ item.e }}</span>
                   <span>{{ item.p }}</span>
                   <span>{{ item.c }}</span>
                   <span>{{ item.m }}</span>
-                  <!-- <span>C:{{ item.c }}</span>
-                  <span>M:{{ item.m }}</span> -->
-                  <!-- E:{{ item.e }} P:{{ item.p }} C:{{ item.c }} M:{{ item.m }} -->
                 </div>
               </div>
             </div>
@@ -98,6 +143,7 @@ const dealMyDate = (v: any) => {
       </el-card>
       <el-card class="pie-card">
         <div class="calendar-title"><p>分项图</p></div>
+        <div class="echarts-wrapper"><base-echart :option="echartsOption" :width="'600'"/></div>
       </el-card>
     </div>
   </div>
@@ -134,14 +180,15 @@ const dealMyDate = (v: any) => {
   font-size: 14px;
   font-weight: bold;
   text-align: right;
-  span {
-    font-size: 10px;
-  }
 }
 .remark-text {
+  .e-span-color {
+    background-color: #588ebd;
+  }
   span {
     font-weight: bold;
-    font-size: 10px;
+    font-size: 12px;
+    width: 30px;
   }
 }
 
@@ -157,6 +204,7 @@ const dealMyDate = (v: any) => {
 }
 .left-card {
   flex: 2;
+  margin-right: 15px;
 }
 .right-card {
   flex: 3;
