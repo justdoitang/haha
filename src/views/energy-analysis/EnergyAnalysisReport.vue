@@ -41,8 +41,12 @@ const echartsOption = {
     containLabel: true
   },
   toolbox: {
+    show: true,
     feature: {
-      saveAsImage: {}
+      dataView: { show: true, readOnly: false },
+      magicType: { show: true, type: ["line", "bar"] },
+      restore: { show: true },
+      saveAsImage: { show: true }
     }
   },
   xAxis: {
@@ -127,14 +131,6 @@ const resetSearch = () => {
           </el-select>
           <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">查询数据</el-button>
           <el-button type="primary" :icon="UploadFilled">导出数据</el-button>
-        </div>
-        <div>
-          <el-tooltip content="下载">
-            <el-button type="primary" :icon="Download" circle />
-          </el-tooltip>
-          <el-tooltip content="刷新当前页">
-            <el-button type="primary" :icon="RefreshRight" circle @click="getTableData" />
-          </el-tooltip>
         </div>
       </div>
       <div class="echarts-wrapper"><base-echart :option="echartsOption" /></div>

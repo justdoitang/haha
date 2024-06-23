@@ -118,7 +118,27 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "EnergyEfficiencyCalendar",
         meta: {
           title: "能效日历",
-          elIcon: "Grid",
+          elIcon: "Calendar",
+          keepAlive: true
+        }
+      },
+      {
+        path: "efficiency-query",
+        component: () => import("@/views/energy-efficiency-analysis/EfficiencyQuery.vue"),
+        name: "EfficiencyQuery",
+        meta: {
+          title: "能效查询",
+          elIcon: "Histogram",
+          keepAlive: true
+        }
+      },
+      {
+        path: "efficiency-contrast",
+        component: () => import("@/views/energy-efficiency-analysis/EfficiencyContrast.vue"),
+        name: "EfficiencyContrast",
+        meta: {
+          title: "能效对比",
+          elIcon: "Histogram",
           keepAlive: true
         }
       },
@@ -128,7 +148,17 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "LoadProportion",
         meta: {
           title: "负荷比重",
-          elIcon: "Histogram",
+          elIcon: "HelpFilled",
+          keepAlive: true
+        }
+      },
+      {
+        path: "hot-balance-rate",
+        component: () => import("@/views/energy-efficiency-analysis/HotBalanceRate.vue"),
+        name: "HotBalanceRate",
+        meta: {
+          title: "热平衡率",
+          elIcon: "Magnet",
           keepAlive: true
         }
       }

@@ -1,27 +1,20 @@
 <script lang="ts" setup>
 import { reactive, ref, watch } from "vue"
-import { getTableDataApi } from "@/api/table"
 import { type CreateOrUpdateTableRequestData, type GetTableData } from "@/api/table/types/table"
 import { type FormInstance, type FormRules, ElMessage, ElMessageBox } from "element-plus"
 import { Search, Refresh, CirclePlus, UploadFilled, Delete, Download, RefreshRight } from "@element-plus/icons-vue"
 import BaseEchart from "@/components/Echart/BaseEchart.vue"
-import { now } from "lodash-es"
 
 defineOptions({
   // 命名当前组件
-  name: "LoadProportion"
+  name: "HotBalanceRate"
 })
 
 const echartsOption = {
   tooltip: {
-    trigger: "axis",
-    axisPointer: {
-      type: "cross",
-      crossStyle: {
-        color: "#999"
-      }
-    }
+    trigger: "axis"
   },
+  legend: {},
   toolbox: {
     feature: {
       dataView: { show: true, readOnly: false },
@@ -30,75 +23,39 @@ const echartsOption = {
       saveAsImage: { show: true }
     }
   },
-  legend: {
-    data: ["负荷比例(%)", "冷站能效(KW/KW)"]
+  xAxis: {
+    type: "category",
+    boundaryGap: false,
+    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
   },
-  xAxis: [
-    {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      axisPointer: {
-        type: "shadow"
-      }
-    }
-  ],
-  yAxis: [
-    {
-      type: "value",
-      name: "负荷比例(%)",
-      min: 0,
-      max: 100,
-      interval: 10,
-      axisLabel: {
-        formatter: "{value}"
-      },
-      axisLine: {
-        show: true
-      }
+  yAxis: {
+    type: "value",
+    name: "热不平衡率",
+    min: -20,
+    max: 20,
+    interval: 4,
+    axisLabel: {
+      formatter: "{value}"
     },
-    {
-      type: "value",
-      name: "冷站能效(KW/KW)",
-      min: 0,
-      max: 9,
-      interval: 0.9,
-      axisLabel: {
-        formatter: "{value}"
-      },
-      axisLine: {
-        show: true
-      }
+    axisLine: {
+      show: true
     }
-  ],
+  },
   series: [
     {
-      name: "负荷比例(%)",
-      type: "bar",
-      tooltip: {
-        valueFormatter: function (value) {
-          return (value as number) + " %"
-        }
-      },
-      data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-    },
-    {
-      name: "冷站能效(KW/KW)",
+      name: "冷站热不平衡率",
       type: "line",
-      yAxisIndex: 1,
-      tooltip: {
-        valueFormatter: function (value) {
-          return (value as number) + " KW/KW"
-        }
-      },
-      data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+      data: [1, -2, 2, 5, 3, 2, 0]
     }
   ]
 }
 
 //#region 查
 const loading = ref<boolean>(false)
+const tableData = ref<GetTableData[]>([])
 const searchData = reactive({
-  queryDate: now()
+  startDate: "",
+  endDate: ""
 })
 const getTableData = () => {
   loading.value = true
@@ -112,18 +69,33 @@ const getTableData = () => {
       <div class="toolbar-wrapper">
         <div>
           <el-date-picker
-            type="month"
-            v-model="searchData.queryDate"
-            placeholder="日期选择"
+            v-model="searchData.startDate"
+            type="date"
+            placeholder="开始时间"
             size="default"
             style="width: 120px; margin-right: 10px"
           />
-          <el-button type="primary" :icon="CirclePlus">查询数据</el-button>
+          <el-date-picker
+            v-model="searchData.endDate"
+            type="date"
+            placeholder="结束时间"
+            size="default"
+            style="width: 120px; margin-right: 10px"
+          />
+          <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">查询数据</el-button>
           <el-button type="primary" :icon="UploadFilled">导出数据</el-button>
         </div>
       </div>
       <div class="echarts-wrapper"><base-echart :option="echartsOption" /></div>
-      <div style="margin-left: 140px"><span>注:上行为比例区间,中 下行为冷量区间，冷量单位分别为为KWNH RTH</span></div>
+      <div class="table-wrapper">
+        <el-table :data="tableData" border stripe>
+          <el-table-column prop="username" label="采集量" align="center" />
+          <el-table-column prop="username" label="达标量" align="center" />
+          <el-table-column prop="username" label="不达标量" align="center" />
+          <el-table-column prop="username" label="达标率" align="center" />
+          <el-table-column prop="username" label="数据校核" align="center" />
+        </el-table>
+      </div>
     </el-card>
   </div>
 </template>
@@ -143,13 +115,13 @@ const getTableData = () => {
   height: 100%;
 }
 
+.table-wrapper {
+  margin-bottom: 20px;
+}
+
 .pager-wrapper {
   display: flex;
   justify-content: flex-end;
-}
-
-.echarts-wrapper {
-  height: 100%;
 }
 
 :deep(.el-table__header) {
