@@ -70,8 +70,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "EnergyAchievement",
         meta: {
           title: "节能成果",
-          elIcon: "Notebook",
-          affix: true
+          elIcon: "Notebook"
         }
       }
     ]
@@ -84,7 +83,6 @@ export const constantRoutes: RouteRecordRaw[] = [
     meta: {
       title: "能耗分析",
       elIcon: "PieChart",
-      affix: true,
       alwaysShow: true
     },
     children: [
@@ -95,7 +93,8 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "能耗分析",
           elIcon: "Grid",
-          keepAlive: true
+          affix: true,
+          breadcrumb: false
         }
       }
     ]
@@ -227,6 +226,30 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "冷站日志",
           elIcon: "DocumentCopy",
+          keepAlive: true
+        }
+      }
+    ]
+  },
+  {
+    path: "/system-config",
+    component: Layouts,
+    redirect: "/system-config/energy-param",
+    name: "SystemConfig",
+    meta: {
+      title: "系统设置",
+      elIcon: "Setting",
+      affix: true,
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: "energy-param",
+        component: () => import("@/views/system-config/EnergyParam.vue"),
+        name: "EnergyParam",
+        meta: {
+          title: "能源参数",
+          elIcon: "Van",
           keepAlive: true
         }
       }

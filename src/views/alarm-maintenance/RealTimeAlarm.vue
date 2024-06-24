@@ -95,12 +95,14 @@ const getTableData = () => {
 </template>
 
 <style lang="scss" scoped>
+
 .toolbar-title {
   display: flex;
   justify-content: center;
   align-items: center;
   span {
     font-size: 15px;
+    font-weight: bold;
   }
 }
 .search-wrapper {
