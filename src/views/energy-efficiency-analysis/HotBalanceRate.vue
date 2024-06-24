@@ -14,7 +14,9 @@ const echartsOption = {
   tooltip: {
     trigger: "axis"
   },
-  legend: {},
+  legend: {
+    data: ["冷站热不平衡率"]
+  },
   toolbox: {
     feature: {
       dataView: { show: true, readOnly: false },

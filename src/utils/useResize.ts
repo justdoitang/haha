@@ -1,10 +1,10 @@
-import { onMounted, onActivated, onBeforeUnmount, onDeactivated, ref } from "vue"
+import { onMounted, onActivated, onBeforeUnmount, onDeactivated, shallowRef } from "vue"
 import { debounce } from "./debounce"
-import type { Ref } from "vue"
+import type { ShallowRef } from "vue"
 import type * as echarts from "echarts"
 
-export default function useResize(chart: Ref<echarts.ECharts | null>) {
-  const $_resizeHandler = ref<EventListenerOrEventListenerObject | null>(null)
+export default function useResize(chart: ShallowRef<echarts.ECharts | null>) {
+  const $_resizeHandler = shallowRef<EventListenerOrEventListenerObject | null>(null)
 
   onMounted(() => {
     initListener()

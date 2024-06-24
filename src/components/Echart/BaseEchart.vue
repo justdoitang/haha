@@ -3,10 +3,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch } from "vue"
+import { onMounted, onBeforeUnmount, watch, shallowRef } from "vue"
 import * as echarts from "echarts"
 import useResize from "../../utils/useResize"
-import type { Ref } from "vue"
+import type { ShallowRef } from "vue"
 
 interface IProps {
   option: echarts.EChartsCoreOption
@@ -17,8 +17,8 @@ interface IProps {
 
 const props = withDefaults(defineProps<IProps>(), { class: "base-echart", width: "1600px", height: "500px" })
 
-const echartRef = ref<HTMLElement | null>(null)
-const echartInstance: Ref<echarts.ECharts | null> = ref(null)
+const echartRef = shallowRef<HTMLElement | null>(null)
+const echartInstance: ShallowRef<echarts.ECharts | null> = shallowRef(null)
 
 onMounted(() => {
   initChart()
