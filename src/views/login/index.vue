@@ -4,9 +4,7 @@ import { useRouter } from "vue-router"
 import { useUserStore } from "@/store/modules/user"
 import { type FormInstance, type FormRules } from "element-plus"
 import { User, Lock, Key, Picture, Loading } from "@element-plus/icons-vue"
-import { getLoginCodeApi } from "@/api/login"
 import { type LoginRequestData } from "@/api/login/types/login"
-import ThemeSwitch from "@/components/ThemeSwitch/index.vue"
 import { useFocus } from "./hooks/useFocus"
 
 const router = useRouter()
@@ -23,9 +21,8 @@ const loading = ref(false)
 const codeUrl = ref("")
 /** 登录表单数据 */
 const loginFormData: LoginRequestData = reactive({
-  username: "admin",
-  password: "12345678"
-  //code: ""
+  username: "",
+  password: ""
 })
 /** 登录表单校验规则 */
 const loginFormRules: FormRules = {
@@ -34,12 +31,10 @@ const loginFormRules: FormRules = {
     { required: true, message: "请输入密码", trigger: "blur" },
     { min: 8, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
   ]
-  // ,
-  // code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
 }
 /** 登录逻辑 */
 const handleLogin = () => {
-  loginFormRef.value?.validate((valid: boolean, fields) => {
+  loginFormRef.value?.validate((valid: boolean, fields: any) => {
     if (valid) {
       loading.value = true
       useUserStore()
@@ -48,7 +43,6 @@ const handleLogin = () => {
           router.push({ path: "/" })
         })
         .catch(() => {
-          // createCode()
           loginFormData.password = ""
         })
         .finally(() => {
@@ -79,11 +73,16 @@ const handleLogin = () => {
     <!-- 顶部 -->
     <div class="login-bg">
       <div class="login-bg-img"></div>
-      <!-- <img src="@/assets/images/login-bg.png" class="object-fill w-83.33% h-43.75%" alt=""> -->
     </div>
     <div class="login-form">
       <div class="text-30px font-extrabold pb-60px">{{ VITE_APP_TITLE }}</div>
-      <el-form ref="loginFormRef" :model="loginFormData" :rules="loginFormRules" @keyup.enter="handleLogin" class="w-440px">
+      <el-form
+        ref="loginFormRef"
+        :model="loginFormData"
+        :rules="loginFormRules"
+        @keyup.enter="handleLogin"
+        class="w-440px"
+      >
         <el-form-item prop="username">
           <el-input
             v-model.trim="loginFormData.username"
