@@ -41,7 +41,6 @@ const onSubmit = () => {
           </el-form-item>
           <el-form-item label="开始时段" class="form-item-label">
             <el-date-picker
-              type="day"
               v-model="form.start_dete"
               placeholder="开始时间段"
               size="default"
@@ -50,7 +49,6 @@ const onSubmit = () => {
           </el-form-item>
           <el-form-item label="结束时段" class="form-item-label">
             <el-date-picker
-              type="day"
               v-model="form.end_date"
               placeholder="结束时间段"
               size="default"

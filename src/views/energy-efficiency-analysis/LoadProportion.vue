@@ -75,7 +75,7 @@ const echartsOption = {
       name: "负荷比例(%)",
       type: "bar",
       tooltip: {
-        valueFormatter: function (value) {
+        valueFormatter: function (value: any) {
           return (value as number) + " %"
         }
       },
@@ -86,7 +86,7 @@ const echartsOption = {
       type: "line",
       yAxisIndex: 1,
       tooltip: {
-        valueFormatter: function (value) {
+        valueFormatter: function (value: any) {
           return (value as number) + " KW/KW"
         }
       },

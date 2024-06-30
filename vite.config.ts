@@ -14,7 +14,7 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
   const { VITE_PUBLIC_PATH } = viteEnv
   return {
     /** 打包时根据实际情况修改 base */
-    base: VITE_PUBLIC_PATH,
+    base: "/",
     resolve: {
       alias: {
         /** @ 符号指向 src 目录 */
@@ -94,10 +94,10 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
       /** UnoCSS */
       UnoCSS()
     ],
-    /** Vitest 单元测试配置：https://cn.vitest.dev/config */
-    test: {
-      include: ["tests/**/*.test.ts"],
-      environment: "jsdom"
-    }
+    // /** Vitest 单元测试配置：https://cn.vitest.dev/config */
+    // test: {
+    //   include: ["tests/**/*.test.ts"],
+    //   environment: "jsdom"
+    // }
   }
 }

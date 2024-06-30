@@ -84,7 +84,6 @@ const echartsOption = {
   ]
 }
 
-const dialogVisible = ref<boolean>(false)
 //#region 查
 const tableData = ref<GetTableData[]>([])
 const searchFormRef = ref<FormInstance | null>(null)
@@ -129,7 +128,7 @@ const resetSearch = () => {
           <el-select v-model="searchData.selectObj" placeholder="时间间隔" style="width: 120px; margin-right: 10px">
             <el-option v-for="item in objectOptions" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
-          <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">查询数据</el-button>
+          <el-button type="primary" :icon="CirclePlus">查询数据</el-button>
           <el-button type="primary" :icon="UploadFilled">导出数据</el-button>
         </div>
       </div>

@@ -7,7 +7,7 @@ export function debounce<T extends (...args: any[]) => any>(
     if (timerId) {
       clearTimeout(timerId)
     }
-    timerId = setTimeout(() => {
+    timerId = window.setTimeout(() => {
       func(...args)
       timerId = undefined
     }, delay)

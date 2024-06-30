@@ -56,7 +56,6 @@ const dataEntries = [
       <div class="toolbar-wrapper">
         <div>
           <el-date-picker
-            type="day"
             v-model="searchData.queryDate"
             placeholder="日期选择"
             size="default"

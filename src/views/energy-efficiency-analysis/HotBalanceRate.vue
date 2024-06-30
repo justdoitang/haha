@@ -84,7 +84,7 @@ const getTableData = () => {
             size="default"
             style="width: 120px; margin-right: 10px"
           />
-          <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">查询数据</el-button>
+          <el-button type="primary" :icon="CirclePlus">查询数据</el-button>
           <el-button type="primary" :icon="UploadFilled">导出数据</el-button>
         </div>
       </div>

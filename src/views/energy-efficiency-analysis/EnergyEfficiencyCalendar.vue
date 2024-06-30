@@ -81,7 +81,7 @@ const echartsOption = {
 }
 
 const dealMyDate = (v: any) => {
-  let res: Array<{ e: string; p: string; c: string; m: string }> = []
+  let res: Array<{ e?: string; p?: string; c?: string; m?: string }> = []
   for (let index = 0; index < resDate.length; index++) {
     if (resDate[index].date == v) {
       res = resDate[index].content
