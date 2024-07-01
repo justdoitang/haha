@@ -41,6 +41,14 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
           changeOrigin: true
         }
       },
+      // proxy: {
+      //   "/api": {
+      //     target: "http://8.138.82.212:9001",
+      //     ws: true,
+      //     /** 是否允许跨域 */
+      //     changeOrigin: true
+      //   }
+      // },
       /** 预热常用文件，提高初始页面加载速度 */
       warmup: {
         clientFiles: ["./src/layouts/**/*.vue"]
@@ -93,7 +101,7 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
       }),
       /** UnoCSS */
       UnoCSS()
-    ],
+    ]
     // /** Vitest 单元测试配置：https://cn.vitest.dev/config */
     // test: {
     //   include: ["tests/**/*.test.ts"],

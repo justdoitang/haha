@@ -29,7 +29,7 @@ const loginFormRules: FormRules = {
   username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   password: [
     { required: true, message: "请输入密码", trigger: "blur" },
-    { min: 8, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
+    { min: 3, max: 16, message: "长度在 3 到 16 个字符", trigger: "blur" }
   ]
 }
 /** 登录逻辑 */
@@ -72,7 +72,7 @@ const handleLogin = () => {
   <div class="login-container" tabindex="-1">
     <!-- 顶部 -->
     <div class="login-bg">
-      <div class="login-bg-img"></div>
+      <div class="login-bg-img" />
     </div>
     <div class="login-form">
       <div class="text-30px font-extrabold pb-60px">{{ VITE_APP_TITLE }}</div>

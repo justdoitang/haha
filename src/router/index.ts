@@ -75,6 +75,49 @@ export const constantRoutes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: "/operation-monitoring",
+    component: Layouts,
+    redirect: "/operation-monitoring/system-monitor",
+    name: "OperationMonitoring",
+    meta: {
+      title: "运行监控",
+      elIcon: "Monitor",
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: "system-monitor",
+        component: () => import("@/views/operation-monitoring/SystemMonitor.vue"),
+        name: "SystemMonitor",
+        meta: {
+          title: "系统监控",
+          elIcon: "PictureRounded",
+          breadcrumb: false
+        }
+      },
+      {
+        path: "data-curve",
+        component: () => import("@/views/operation-monitoring/DataCurve.vue"),
+        name: "DataCurve",
+        meta: {
+          title: "数据曲线",
+          elIcon: "Crop",
+          breadcrumb: false
+        }
+      },
+      {
+        path: "temporal-strategy",
+        component: () => import("@/views/operation-monitoring/TemporalStrategy.vue"),
+        name: "TemporalStrategy",
+        meta: {
+          title: "时间策略",
+          elIcon: "Tickets",
+          breadcrumb: false
+        }
+      }
+    ]
+  },
+  {
     path: "/energy-analysis",
     component: Layouts,
     redirect: "/energy-analysis/report",
