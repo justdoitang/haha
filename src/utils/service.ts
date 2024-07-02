@@ -29,7 +29,7 @@ function createService() {
       const responseType = response.request?.responseType
       if (responseType === "blob" || responseType === "arraybuffer") return apiData
       // 这个 code 是和后端约定的业务 code
-      const code = apiData.code
+      const code = apiData.ErrorCode
       // 如果没有 code, 代表这不是项目后端开发的 api
       if (code === undefined) {
         ElMessage.error("非本系统的接口")
@@ -103,7 +103,7 @@ function createRequest(service: AxiosInstance) {
     const defaultConfig = {
       headers: {
         // 携带 Token
-        Authorization: token ? `Bearer ${token}` : undefined,
+        Authorization: token ? `BasicAuthorize ${token}` : undefined,
         "Content-Type": "application/json"
       },
       timeout: 5000,
