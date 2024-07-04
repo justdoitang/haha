@@ -151,6 +151,11 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
             </el-checkbox-group>
           </div>
         </el-form>
+        <el-col :span="12"
+          ><el-form-item label="任务编号：" class="form-item-label">
+            <el-input v-model="formData.Name" /> <label>dada</label></el-form-item
+          ></el-col
+        >
       </el-card>
     </div>
   </div>
