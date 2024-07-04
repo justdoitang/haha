@@ -1,8 +1,8 @@
 export interface AddEnergyParamReqData extends EnergyParamBaseData {}
 export interface UptEnergyParamReqData extends EnergyParamBaseData {}
 
-interface EnergyParamBaseData {
-  Id: number
+export interface EnergyParamBaseData {
+  Id: number | undefined
   Name: string
   StartDate: string
   EndDate: string

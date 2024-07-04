@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive, ref, watch } from "vue"
+import { onMounted, ref } from "vue"
 import { getEnergyParamApi, addEnergyParamApi, uptEnergyParamApi } from "@/api/energy-param"
 import { type EnergyParamBaseData } from "@/api/energy-param/types/energy-param"
 import { type FormInstance, type FormRules, ElMessage } from "element-plus"
@@ -10,8 +10,10 @@ defineOptions({
   name: "EnergyParam"
 })
 
+const btnName = ref<string>("")
+
 const DEFAULT_FORM_DATA: EnergyParamBaseData = {
-  id: undefined,
+  Id: undefined,
   Name: "",
   StartDate: "",
   EndDate: "",
@@ -40,16 +42,33 @@ const formRules: FormRules = {
   DownPrice: [{ required: true, trigger: "blur", message: "请输入谷值电价" }]
 }
 
+const getEnergyParamData = () => {
+  getEnergyParamApi()
+    .then((data) => {
+      console.log(data)
+      formData.value = data.Content[0]
+      btnName.value = formData.value.Id === undefined ? "新增电价内容" : "更新电价内容"
+    })
+    .catch(() => {
+      formRef.value?.clearValidate()
+      formData.value = cloneDeep(DEFAULT_FORM_DATA)
+    })
+}
+
 const handleCreateOrUpdate = () => {
   formRef.value?.validate((valid: boolean, fields) => {
     console.log(valid)
     if (!valid) return console.error("表单校验不通过", fields)
-    const api = formData.value.id === undefined ? addEnergyParamApi : uptEnergyParamApi
+    const api = formData.value.Id === undefined ? addEnergyParamApi : uptEnergyParamApi
     api(formData.value).then(() => {
       ElMessage.success("操作成功")
     })
   })
 }
+
+onMounted(() => {
+  getEnergyParamData()
+})
 </script>
 
 <template>
@@ -167,7 +186,7 @@ const handleCreateOrUpdate = () => {
             <label style="margin-left: 10px">元/KWH</label>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="handleCreateOrUpdate"> 新增电价内容 </el-button>
+            <el-button type="primary" @click="handleCreateOrUpdate"> {{ btnName }} </el-button>
           </el-form-item>
         </el-form>
       </el-card>
