@@ -6,6 +6,7 @@ import { type FormInstance, type FormRules, ElMessage, ElMessageBox } from "elem
 import { Search, Refresh, CirclePlus, UploadFilled, Delete, Download, RefreshRight } from "@element-plus/icons-vue"
 import BaseEchart from "@/components/Echart/BaseEchart.vue"
 import { now } from "lodash-es"
+import RatingBar from "@/components/RatingBar/RatingBar.vue"
 
 defineOptions({
   // 命名当前组件
@@ -140,10 +141,11 @@ const dealMyDate = (v: any) => {
     <div class="right-card">
       <el-card class="contrast-card">
         <div class="calendar-title"><p>能耗对比</p></div>
+        <RatingBar :currentRating="4.6" />
       </el-card>
       <el-card class="pie-card">
         <div class="calendar-title"><p>分项图</p></div>
-        <div class="echarts-wrapper"><base-echart :option="echartsOption" :width="'600'"/></div>
+        <div class="echarts-wrapper"><base-echart :option="echartsOption" :width="'600'" /></div>
       </el-card>
     </div>
   </div>
@@ -245,5 +247,9 @@ const dealMyDate = (v: any) => {
 
 :deep(.el-table th.el-table__cell) {
   background-color: rgba(0, 0, 0, 0);
+}
+
+.pie-card {
+  margin-top: 15px;
 }
 </style>
