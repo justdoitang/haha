@@ -1,17 +1,30 @@
 <template>
   <div class="rating-bar">
-    <div class="segments">
-      <div class="segment excellent">优秀</div>
-      <div class="segment good">良好</div>
-      <div class="segment average">一般</div>
-      <div class="segment below-average">为略改进</div>
-    </div>
     <div class="marker" :style="{ left: markerPosition + '%' }">
-      <span>当前能效 ({{ currentRating }})</span>
+      <span :style="{ color: markerColor }">{{ currentLabel }} ({{ currentRating }})</span>
+      <el-icon :size="30" :style="{ color: markerColor }"><LocationFilled /></el-icon>
+    </div>
+    <div class="segments">
+      <div
+        class="segment"
+        v-for="(segment, index) in segments"
+        :key="index"
+        :style="{ backgroundColor: segment.color }"
+      >
+        <label>{{ segment.text }}</label>
+      </div>
+    </div>
+    <div class="scale">
+      <div
+        v-for="(line, index) in scaleLines"
+        :key="index"
+        :class="['scale-line', { 'long-line': line.isLong, 'short-line': !line.isLong }]"
+        :style="{ left: line.position + '%' }"
+      />
     </div>
     <div class="labels">
-      <div class="label" v-for="label in labels" :key="label.value">
-        <div>{{ label.cop }}</div>
+      <div class="label" v-for="label in labels" :key="label.value" :style="{ left: label.value + '%' }">
+        <div>{{ unit }}{{ label.cop }}</div>
         <div>{{ label.kwrt }}</div>
       </div>
     </div>
@@ -19,7 +32,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue"
+import { defineComponent, computed, PropType } from "vue"
+import { ElIcon } from "element-plus"
+import { Location } from "@element-plus/icons-vue"
 
 interface Label {
   cop: number
@@ -27,36 +42,82 @@ interface Label {
   value: number
 }
 
+interface Segment {
+  text: string
+  color: string
+}
+
+interface ScaleLine {
+  position: number
+  isLong: boolean
+}
+
 export default defineComponent({
   name: "RatingBar",
+  components: {
+    ElIcon,
+    Location
+  },
   props: {
     currentRating: {
       type: Number,
       required: true
+    },
+    currentLabel: {
+      type: String,
+      default: "当前能效"
+    },
+    segments: {
+      type: Array as PropType<Segment[]>,
+      required: true
+    },
+    labels: {
+      type: Array as PropType<Label[]>,
+      required: true
+    },
+    unit: {
+      type: String,
+      default: ""
     }
   },
   setup(props) {
-    const labels: Label[] = [
-      { cop: 7.0, kwrt: 0.5, value: 0 },
-      { cop: 5.9, kwrt: 0.6, value: 25 },
-      { cop: 5.0, kwrt: 0.7, value: 50 },
-      { cop: 4.4, kwrt: 0.8, value: 75 },
-      { cop: 3.9, kwrt: 0.9, value: 100 },
-      { cop: 3.5, kwrt: 1.0, value: 125 },
-      { cop: 3.2, kwrt: 1.1, value: 150 },
-      { cop: 2.9, kwrt: 1.2, value: 175 }
-    ]
-
     const markerPosition = computed(() => {
-      const closest = labels.reduce((prev, curr) =>
+      const closest = props.labels.reduce((prev, curr) =>
         Math.abs(curr.cop - props.currentRating) < Math.abs(prev.cop - props.currentRating) ? curr : prev
       )
       return closest.value
     })
 
+    const markerColor = computed(() => {
+      const closestSegment = props.segments.reduce((prev, curr) => {
+        const currDiff = Math.abs(curr.threshold - props.currentRating)
+        const prevDiff = Math.abs(prev.threshold - props.currentRating)
+        return currDiff < prevDiff ? curr : prev
+      })
+      return closestSegment.color
+    })
+
+    const scaleLines = computed(() => {
+      const lines: ScaleLine[] = []
+      for (let i = 0; i < props.labels.length - 1; i++) {
+        const start = props.labels[i]
+        const end = props.labels[i + 1]
+        const step = (end.value - start.value) / 4
+
+        for (let j = 0; j < 4; j++) {
+          lines.push({
+            position: start.value + j * step,
+            isLong: j === 0 || j === 4
+          })
+        }
+      }
+      return lines
+    })
+
     return {
-      labels,
-      markerPosition
+      markerPosition,
+      markerColor,
+      scaleLines
     }
   }
 })
@@ -66,51 +127,35 @@ export default defineComponent({
 .rating-bar {
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 150px;
   margin-bottom: 20px;
 }
 
 .segments {
   display: flex;
-  height: 20px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
 }
 
 .segment {
-  flex: 1;
-  text-align: center;
-  line-height: 20px;
+  flex: 4;
+  line-height: 40px;
   color: white;
   font-weight: bold;
-}
-
-.excellent {
-  background-color: #4caf50; /* green */
-}
-
-.good {
-  background-color: #8bc34a; /* light green */
-}
-
-.average {
-  background-color: #ffeb3b; /* yellow */
-}
-
-.below-average {
-  background-color: #f44336; /* red */
+  text-align: center;
 }
 
 .marker {
   position: absolute;
-  top: 20px;
-  height: 30px;
-  border-left: 2px solid blue;
+  top: -50px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  transform: translateX(-50%);
 }
 
 .marker span {
-  position: absolute;
-  left: -50%;
   white-space: nowrap;
   background: white;
   padding: 2px 5px;
@@ -118,14 +163,38 @@ export default defineComponent({
   font-size: 12px;
 }
 
+.scale {
+  position: relative;
+  height: 10px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.scale-line {
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: black;
+}
+
+.long-line {
+  height: 15px;
+}
+
+.short-line {
+  height: 10px;
+}
+
 .labels {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
+  width: 100%;
   margin-top: 10px;
 }
 
 .label {
+  position: absolute;
   text-align: center;
+  transform: translateX(-50%);
 }
 
 .label div {

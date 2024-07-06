@@ -91,6 +91,23 @@ const dealMyDate = (v: any) => {
   }
   return res
 }
+
+const segments = [
+  { text: "优秀", color: "#4caf50" }, // green
+  { text: "良好", color: "#8bc34a" }, // light green
+  { text: "一般", color: "#ffeb3b" }, // yellow
+  { text: "为略改进", color: "#f44336" } // red
+]
+const labels = [
+  { cop: 7.0, kwrt: 0.5, value: 0 },
+  { cop: 5.9, kwrt: 0.6, value: 25 },
+  { cop: 5.0, kwrt: 0.7, value: 50 },
+  { cop: 4.4, kwrt: 0.8, value: 75 },
+  { cop: 3.9, kwrt: 0.9, value: 100 },
+  { cop: 3.5, kwrt: 1.0, value: 125 },
+  { cop: 3.2, kwrt: 1.1, value: 150 },
+  { cop: 2.9, kwrt: 1.2, value: 175 }
+]
 </script>
 
 <template>
@@ -141,7 +158,7 @@ const dealMyDate = (v: any) => {
     <div class="right-card">
       <el-card class="contrast-card">
         <div class="calendar-title"><p>能耗对比</p></div>
-        <RatingBar :currentRating="4.6" />
+        <RatingBar :currentRating="4.0" currentLabel="当前能效" :segments="segments" :labels="labels" unit="COP " />
       </el-card>
       <el-card class="pie-card">
         <div class="calendar-title"><p>分项图</p></div>
@@ -248,7 +265,12 @@ const dealMyDate = (v: any) => {
 :deep(.el-table th.el-table__cell) {
   background-color: rgba(0, 0, 0, 0);
 }
-
+.contrast-card {
+  height: 400px;
+}
+.rating-bar {
+  margin-top: 120px;
+}
 .pie-card {
   margin-top: 15px;
 }
