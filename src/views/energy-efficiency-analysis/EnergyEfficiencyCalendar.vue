@@ -158,7 +158,14 @@ const labels = [
     <div class="right-card">
       <el-card class="contrast-card">
         <div class="calendar-title"><p>能耗对比</p></div>
-        <RatingBar :currentRating="4.0" currentLabel="当前能效" :segments="segments" :labels="labels" unit="COP " />
+        <RatingBar
+          :currentRating="4.0"
+          currentLabel="当前能效"
+          :segments="segments"
+          :labels="labels"
+          unit="COP "
+          :width="800"
+        />
       </el-card>
       <el-card class="pie-card">
         <div class="calendar-title"><p>分项图</p></div>
@@ -270,6 +277,7 @@ const labels = [
 }
 .rating-bar {
   margin-top: 120px;
+  width: 80%;
 }
 .pie-card {
   margin-top: 15px;

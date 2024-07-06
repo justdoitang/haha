@@ -1,5 +1,5 @@
 <template>
-  <div class="rating-bar">
+  <div class="rating-bar" :style="{ width: width + 'px' }">
     <div class="marker" :style="{ left: markerPosition + '%' }">
       <span :style="{ color: markerColor }">{{ currentLabel }} ({{ currentRating }})</span>
       <el-icon :size="30" :style="{ color: markerColor }"><LocationFilled /></el-icon>
@@ -34,7 +34,7 @@
 <script lang="ts">
 import { defineComponent, computed, PropType } from "vue"
 import { ElIcon } from "element-plus"
-import { Location } from "@element-plus/icons-vue"
+import { LocationFilled } from "@element-plus/icons-vue"
 
 interface Label {
   cop: number
@@ -56,7 +56,7 @@ export default defineComponent({
   name: "RatingBar",
   components: {
     ElIcon,
-    Location
+    LocationFilled
   },
   props: {
     currentRating: {
@@ -78,6 +78,10 @@ export default defineComponent({
     unit: {
       type: String,
       default: ""
+    },
+    width: {
+      type: Number,
+      default: 600
     }
   },
   setup(props) {
@@ -167,12 +171,11 @@ export default defineComponent({
   position: relative;
   height: 10px;
   width: 100%;
-  margin-top: 5px;
 }
 
 .scale-line {
   position: absolute;
-  width: 2px;
+  width: 1px;
   height: 10px;
   background: black;
 }
