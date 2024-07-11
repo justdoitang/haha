@@ -91,7 +91,7 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
       </el-card>
     </div>
     <div class="right-card">
-      <el-card style="min-width: 1300px">
+      <el-card style="min-width: 1290px">
         <el-form class="form-style" :model="formData" label-width="130px" label-position="left">
           <div class="form-col">
             <el-col :span="12"
@@ -248,7 +248,7 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
   align-items: center;
   .el-checkbox-group {
     align-items: center;
-    margin-left: 15px;
+    margin-left: 10px;
     // margin-top: 3px;
     // margin-bottom: 3px;
   }
