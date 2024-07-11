@@ -86,12 +86,12 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
 <template>
   <div class="app-container">
     <div class="left-card">
-      <el-card shadow="never">
+      <el-card shadow="never" style="max-width: 400px">
         <div class="card-title"><p>时间策略配置</p></div>
       </el-card>
     </div>
     <div class="right-card">
-      <el-card>
+      <el-card style="min-width: 1300px">
         <el-form class="form-style" :model="formData" label-width="130px" label-position="left">
           <div class="form-col">
             <el-col :span="12"
@@ -110,7 +110,6 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
                   v-model="formData.Name"
                   type="date"
                   placeholder="开始时间"
-                  size="default"
                   style="width: 160px; margin-right: 10px" /></el-form-item
             ></el-col>
             <el-col :span="8"
@@ -119,7 +118,6 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
                   v-model="formData.Name"
                   type="date"
                   placeholder="开始时间"
-                  size="default"
                   style="width: 160px; margin-right: 10px"
                 /> </el-form-item
             ></el-col>
@@ -217,7 +215,7 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
   }
 }
 .el-card {
-  height: 920px;
+  height: 828px;
 }
 .left-card {
   flex: 2;
@@ -227,6 +225,7 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
   flex: 5;
 }
 .form-col {
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,14 +244,13 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
   --el-input-width: 300px;
 }
 .checkbox-group {
-  border: 3px solid #000;
+  border: 2px solid #000;
   align-items: center;
-  margin-bottom: 8px;
   .el-checkbox-group {
     align-items: center;
     margin-left: 15px;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    // margin-top: 3px;
+    // margin-bottom: 3px;
   }
   .el-checkbox {
     margin-left: 30px;
@@ -263,8 +261,8 @@ const formData = ref<EnergyParamBaseData>(cloneDeep(DEFAULT_FORM_DATA))
   margin-bottom: 0px;
 }
 .input-group {
-  margin-top: 20px;
-  margin-bottom: -10px;
+  margin-top: 10px;
+  margin-bottom: -5px;
   .el-input {
     width: 160px;
   }
