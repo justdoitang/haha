@@ -8,7 +8,7 @@ import BaseEchart from "@/components/Echart/BaseEchart.vue"
 
 defineOptions({
   // 命名当前组件
-  name: "EnergyAnalysisReport1"
+  name: "EnergyAnalysisReport"
 })
 
 const loading = ref<boolean>(false)
@@ -31,9 +31,9 @@ const echartsOption = {
   tooltip: {
     trigger: "axis"
   },
-  legend: {
-    data: ["总用电(KWH)", "总冷量(KWH)", "总热量(KWH)"]
-  },
+  // legend: {
+  //   data: ["总用电(KWH)", "总冷量(KWH)", "总热量(KWH)"]
+  // },
   grid: {
     left: "3%",
     right: "4%",
