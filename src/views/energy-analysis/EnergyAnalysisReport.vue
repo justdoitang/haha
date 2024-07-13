@@ -31,10 +31,10 @@ const objectOptions = [
 ]
 
 const energyAnalysisReportLineBaseData = [
-  { DataDateTiem: "06-06 00:00", TotalUseElectric: "2000", TotalHot: "1500", TotalCool: "900" },
-  { DataDateTiem: "06-06 01:00", TotalUseElectric: "3000", TotalHot: "900", TotalCool: "1100" },
-  { DataDateTiem: "06-06 02:00", TotalUseElectric: "1500", TotalHot: "1600", TotalCool: "700" },
-  { DataDateTiem: "06-06 03:00", TotalUseElectric: "2800", TotalHot: "1400", TotalCool: "3000" }
+  { DataDateTime: "06-06 00:00", TotalUseElectric: "2000", TotalHot: "1500", TotalCool: "900" },
+  { DataDateTime: "06-06 01:00", TotalUseElectric: "3000", TotalHot: "900", TotalCool: "1100" },
+  { DataDateTime: "06-06 02:00", TotalUseElectric: "1500", TotalHot: "1600", TotalCool: "700" },
+  { DataDateTime: "06-06 03:00", TotalUseElectric: "2800", TotalHot: "1400", TotalCool: "3000" }
 ]
 const energyAnalysisReportTableBaseData = [
   {
@@ -83,7 +83,7 @@ const getTableData = async () => {
   let TotalCool: any[] = []
   let DateList: string[] = []
   for (const i of energyAnalysisReportLineBaseData) {
-    DateList.push(i.DataDateTiem)
+    DateList.push(i.DataDateTime)
     TotalUseElectric.push(i.TotalUseElectric)
     TotalHot.push(i.TotalHot)
     TotalCool.push(i.TotalCool)

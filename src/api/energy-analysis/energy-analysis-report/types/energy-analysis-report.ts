@@ -14,7 +14,7 @@ export type GetEnergyAnalysisReportLineRespData = ApiResponseData<{
 
 //能耗分析折线图响应基模型
 export interface GetEnergyAnalysisReportLineBaseData {
-  DataDateTiem: string //时间
+  DataDateTime: string //时间
   TotalUseElectric: string //总用电
   TotalHot: string //总热量
   TotalCool: boolean //总冷量
