@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, watch, shallowRef } from "vue"
+import { onMounted, onUnmounted, onBeforeUnmount, watch, shallowRef } from "vue"
 import * as echarts from "echarts"
 import useResize from "../../utils/useResize"
 import type { ShallowRef } from "vue"
@@ -23,7 +23,13 @@ const echartInstance: ShallowRef<echarts.ECharts | null> = shallowRef(null)
 onMounted(() => {
   initChart()
 })
-
+onUnmounted(() => {
+  if (!echartInstance.value) {
+    return
+  }
+  echartInstance.value!.dispose()
+  echartInstance.value = null
+})
 watch(
   () => props.option,
   () => {
@@ -42,6 +48,11 @@ onBeforeUnmount(() => {
 useResize(echartInstance)
 
 const initChart = () => {
+  if (echartInstance.value) {
+    echartInstance.value!.dispose()
+    echartInstance.value = null
+  }
+
   echartInstance.value = echarts.init(echartRef.value!, "light", {
     renderer: "canvas"
   })

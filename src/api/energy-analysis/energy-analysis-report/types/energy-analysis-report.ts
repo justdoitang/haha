@@ -22,11 +22,12 @@ export interface GetEnergyAnalysisReportLineBaseData {
 
 //能耗分析表格响应基模型
 export interface GetEnergyAnalysisReportTableBaseData {
-  Obj: string //时间
+  Obj: string //对象
   TotalValue: string //总值
   PeakValue: string //峰值
   PeakValueDate: string //峰值出现时间
   ValleyValue: string //谷值
+  ValleyValueDate: string //谷值出现时间
   AverageValue: string //平均值
 }
 
