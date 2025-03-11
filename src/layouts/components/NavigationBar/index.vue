@@ -37,12 +37,12 @@ const logout = () => {
 
 <template>
   <div class="navigation-bar">
-    <Hamburger
+    <!-- <Hamburger
       v-if="!isTop || isMobile"
       :is-active="appStore.sidebar.opened"
       class="hamburger"
       @toggle-click="toggleSidebar"
-    />
+    /> -->
     <Breadcrumb v-if="!isTop || isMobile" class="breadcrumb" />
     <Sidebar v-if="isTop && !isMobile" class="sidebar" />
     <div class="right-menu">
@@ -89,6 +89,7 @@ const logout = () => {
   }
   .breadcrumb {
     flex: 1;
+    padding: 0 15px;
     // 参考 Bootstrap 的响应式设计将宽度设置为 576
     @media screen and (max-width: 576px) {
       display: none;

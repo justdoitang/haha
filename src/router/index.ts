@@ -92,7 +92,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "系统监控",
           elIcon: "PictureRounded",
-          breadcrumb: false
+          //breadcrumb: false
         }
       },
       {
@@ -102,7 +102,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "数据曲线",
           elIcon: "Crop",
-          breadcrumb: false
+          //breadcrumb: false
         }
       },
       {
@@ -112,7 +112,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "时间策略",
           elIcon: "Tickets",
-          breadcrumb: false
+          //breadcrumb: false
         }
       }
     ]
@@ -135,7 +135,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "能耗分析",
           elIcon: "Grid",
-          breadcrumb: false
+          //breadcrumb: false
         }
       }
     ]
