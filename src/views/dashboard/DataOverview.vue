@@ -1,10 +1,6 @@
 <template>
   <div class="app-container center">
-    <div>zuobian</div>
-    <div>youbian
-      <div>右上</div>
-      <div>右下</div>
-    </div>
+    <el-empty description="欢迎来到 节能成果页面" />
   </div>
 </template>
 

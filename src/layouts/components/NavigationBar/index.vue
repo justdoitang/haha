@@ -37,12 +37,12 @@ const logout = () => {
 
 <template>
   <div class="navigation-bar">
-    <!-- <Hamburger
+    <Hamburger
       v-if="!isTop || isMobile"
       :is-active="appStore.sidebar.opened"
       class="hamburger"
       @toggle-click="toggleSidebar"
-    /> -->
+    />
     <Breadcrumb v-if="!isTop || isMobile" class="breadcrumb" />
     <Sidebar v-if="isTop && !isMobile" class="sidebar" />
     <div class="right-menu">
