@@ -34,36 +34,60 @@
       <div class="right-content">
         <!-- 节能数据 -->
         <div class="jieneng-panel">
-          <div class="grid-5">
-            <div class="data-box blue">
-              节能量 <br />
-              <span>130365.4 kWh</span>
+          <div class="text-container">
+            <div class="blue-line"></div>
+            <div class="title-head">节能减排情况</div>
+          </div>
+          <div class="pie-container">
+            <div>
+              <div class="data-box blue">
+                <div class="pie-value">130365.4</div>
+              </div>
+              <div class="pie-name">节能量(kWh)</div>
             </div>
-            <div class="data-box blue">
-              节费量 <br />
-              <span>104292.3 元</span>
+            <div>
+              <div class="data-box blue">
+                <!-- 节费量 <br /> -->
+                <div class="pie-value">104292.3</div>
+              </div>
+              <div class="pie-name">节费量(元)</div>
             </div>
-            <div class="data-box green">
-              减碳量 <br />
-              <span>120979.1 kg</span>
+            <div>
+              <div class="data-box green">
+                <!-- 减碳量 <br /> -->
+                <div class="pie-value">120979.1</div>
+              </div>
+              <div class="pie-name">减碳量(kg)</div>
             </div>
-            <div class="data-box green">
-              碳资产 <br />
-              <span>6049.0 元</span>
+
+            <div>
+              <div class="data-box green">
+                <!-- 碳资产 <br /> -->
+                <div class="pie-value">6049.0</div>
+              </div>
+              <div class="pie-name">碳资产增值(元)</div>
             </div>
-            <div class="data-box green">
-              等效植树 <br />
-              <span>6721 棵</span>
+            <div>
+              <div class="data-box green">
+                <!-- 等效植树 <br /> -->
+                <div class="pie-value">6721</div>
+              </div>
+              <div class="pie-name">等效植树(棵)</div>
             </div>
           </div>
         </div>
 
         <!-- 实时数据 -->
         <div class="shishi-panel">
-          <h3 class="subtitle">实时数据</h3>
-          <p>系统能耗: <span class="highlight blue">198653.2 kWh</span></p>
-          <p>制冷量: <span class="highlight blue">1316074.8 kWh</span></p>
-          <div id="chart"></div>
+          <div class="text-container">
+            <div class="blue-line"></div>
+            <div class="title-head">节能减排情况</div>
+          </div>
+          <div class="chart-container">
+            <div class="chart-total-name"></div>
+            <div class="chart-total-val"></div>
+            <div class="chart-table"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -91,6 +115,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.chart-container{
+  background-color: red;
+  margin: 30px;
+  height: 350px;
+}
+
+
 /* 页面基础布局 */
 .time-period-selector {
   display: flex;
@@ -200,7 +231,7 @@ onMounted(() => {
 /* 网格布局 */
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 460px 1fr;
   gap: 20px;
   height: 750px;
 }
@@ -217,14 +248,14 @@ onMounted(() => {
   background: #2a2a3c;
   padding: 20px;
   border-radius: 10px;
-  width: 460px;
+  /* width: 460px; */
   height: 750px;
 }
 .jieneng-panel {
   background: #2a2a3c;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
-  height: 200px;
+  height: 300px;
 }
 .shishi-panel {
   background: #2a2a3c;
@@ -261,17 +292,50 @@ onMounted(() => {
 }
 
 /* 节能数据块 */
-.grid-5 {
+.pie-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
   text-align: center;
+  margin-top: 30px;
+  margin-left: 90px;
+  margin-bottom: 20px;
 }
-
+.pie-value {
+  margin-top: 50px;
+  font-size: 18px;
+  color: #fcfbfb;
+}
+.pie-name {
+  width: 130px;
+  margin-top: 30px;
+  font-size: 16px;
+  color: #fcfbfb;
+}
+.text-container {
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+.blue-line {
+  width: 4px;
+  height: 16px;
+  background-color: #1e88e5;
+  margin-right: 8px;
+}
+.title-head {
+  color: #fcfbfb;
+  font-size: 16px;
+  /* font-weight: bold;  */
+}
 .data-box {
+  display: flex;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
   padding: 10px;
-  border-radius: 8px;
   font-weight: bold;
+  border-radius: 50%;
 }
 
 .blue {
