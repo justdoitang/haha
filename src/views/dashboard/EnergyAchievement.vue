@@ -84,9 +84,17 @@
             <div class="title-head">节能减排情况</div>
           </div>
           <div class="chart-container">
-            <div class="chart-total-name"></div>
-            <div class="chart-total-val"></div>
-            <div class="chart-table"></div>
+            <div class="chart-total-name">
+              <div class="chart-total-name-div">系统能耗 <span class="chart-total-name-span">kWh</span></div>
+              <div class="chart-total-name-div">制冷量 <span class="chart-total-name-span">kWh</span></div>
+            </div>
+            <div class="chart-total-val">
+              <div class="chart-total-val-div">198653.33</div>
+              <div class="chart-total-val-div">2025033.56</div>
+            </div>
+            <div class="chart-table">
+              <base-echart :option="echartsOption" width="1080px" height="300px" />
+            </div>
           </div>
         </div>
       </div>
@@ -94,33 +102,148 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { onMounted } from "vue"
 import * as echarts from "echarts"
 import { ref } from "vue"
+import BaseEchart from "@/components/Echart/BaseEchart.vue"
+import { text } from "stream/consumers"
 
 const selectedTime = ref("allYear") // 默认选中“全年”
+const echartsOption = {
+  tooltip: {
+    trigger: "axis",
+    axisPointer: {
+      type: "cross",
+      crossStyle: {
+        color: "#fcfbfb"
+      }
+    }
+  },
+  // toolbox: {
+  //   feature: {
+  //     dataView: { show: true, readOnly: false },
+  //     magicType: { show: true, type: ["line", "bar"] },
+  //     restore: { show: true },
+  //     saveAsImage: { show: true }
+  //   }
+  // },
+  legend: {
+    data: ["能耗", "制冷量"],
+    textStyle: {
+      color: "#fcfbfb"
+    }
+  },
+  xAxis: [
+    {
+      type: "category",
+      data: ["一月", "二月", "三月"],
+      axisPointer: {
+        type: "shadow"
+      },
+      axisLine: {
+        lineStyle: {
+          color: "#fcfbfb"
+        }
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: "value",
+      name: "电量单位：kWh",
+      min: 0,
+      max: 60,
+      interval: 10,
+      axisLabel: {
+        formatter: "{value}"
+      },
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: "#fcfbfb"
+        }
+      }
+    }
+  ],
+  series: [
+    {
+      name: "能耗",
+      type: "bar",
+      itemStyle: {
+        color: "#22c55e"
+      },
+      tooltip: {
+        valueFormatter: function (value: any) {
+          return (value as number) + " %"
+        }
+      },
+      data: [2.6, 5.9, 9.0]
+    },
 
-onMounted(() => {
-  let chart = echarts.init(document.getElementById("chart"))
-  chart.setOption({
-    xAxis: { type: "category", data: ["1月", "2月", "3月"] },
-    yAxis: { type: "value" },
-    series: [
-      { name: "能耗", type: "bar", data: [200000, 60360.5, 198653.2], color: "blue" },
-      { name: "制冷量", type: "bar", data: [600000, 426631.5, 1316074.8], color: "green" }
-    ]
-  })
-})
+    {
+      name: "制冷量",
+      type: "bar",
+      itemStyle: {
+        color: "#3b82f6"
+      },
+      tooltip: {
+        valueFormatter: function (value: any) {
+          return (value as number) + " %"
+        }
+      },
+      data: [2.6, 5.9, 9.0]
+    }
+  ]
+}
 </script>
 
 <style scoped>
-.chart-container{
-  background-color: red;
-  margin: 30px;
-  height: 350px;
+.chart-table {
+  margin-top: 30px;
+  /* width: 300px; */
+  /* height: 200px; */
 }
-
+.chart-total-val-div {
+  flex-grow: 1;
+  width: 50%;
+  text-align: center;
+  margin-top: 6px;
+  font-size: 24px;
+  color: #3b82f6;
+}
+.chart-total-val {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  background-color: #515152;
+  margin-top: 10px;
+}
+.chart-total-name {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  background-color: #252a30;
+}
+.chart-total-name-div {
+  flex-grow: 1;
+  width: 50%;
+  text-align: center;
+  margin-top: 15px;
+}
+.chart-total-name-span {
+  margin-left: 6px;
+  color: #3b82f6;
+  font-size: 13px;
+  font-weight: bold;
+}
+.chart-container {
+  margin: 30px;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /* 页面基础布局 */
 .time-period-selector {
@@ -261,7 +384,7 @@ onMounted(() => {
   background: #2a2a3c;
   padding: 20px;
   border-radius: 10px;
-  height: 550px;
+  height: 100%;
 }
 
 /* 左侧图标 */
