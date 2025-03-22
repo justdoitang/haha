@@ -370,20 +370,20 @@ const echartsOption = {
 .left-panel {
   background: #2a2a3c;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   /* width: 460px; */
   height: 750px;
 }
 .jieneng-panel {
   background: #2a2a3c;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 300px;
 }
 .shishi-panel {
   background: #2a2a3c;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 5px;
   height: 100%;
 }
 
@@ -448,8 +448,8 @@ const echartsOption = {
 }
 .title-head {
   color: #fcfbfb;
-  font-size: 16px;
-  /* font-weight: bold;  */
+  font-size: 14px;
+  font-weight: bold;
 }
 .data-box {
   display: flex;
