@@ -49,7 +49,7 @@
             :data="deviceData"
             style="width: 100%"
             :header-cell-style="{ background: '#343d4c', color: '#fff', 'text-align': 'center', border: 'none' }"
-            :row-style="{ background: '#2b333e', color: '#fff'}"
+            :row-style="{ background: '#2b333e', color: '#fff' }"
           >
             <el-table-column prop="name" label="设备名称" width="200" align="center">
               <template #default="{ row }">
@@ -78,11 +78,53 @@
           <div class="blue-line"></div>
           <div class="title-head">系统整体能效</div>
         </div>
+        <div class="data-container">
+          <div class="energy-efficiency-left">
+            <span style="font-size: 32px; color: #5289e3; margin-bottom: 8px">6.58</span>
+            <span class="unit-span">kw/kw</span>
+            <span style="font-size: 14px; margin-top: 4px">冷站效率</span>
+          </div>
+          <div class="energy-efficiency-right">
+            <div class="energy-efficiency-child">
+              <div><span class="energy-efficiency-value-span">998</span><span class="unit-span">kw</span></div>
+              <span class="energy-efficiency-name-span">系统冷量</span>
+            </div>
+            <div class="energy-efficiency-child">
+              <div><span class="energy-efficiency-value-span">729.0</span><span class="unit-span">kw</span></div>
+              <span class="energy-efficiency-name-span">系统散热量</span>
+            </div>
+            <div class="energy-efficiency-child">
+              <div><span class="energy-efficiency-value-span">154.4</span><span class="unit-span">kw</span></div>
+              <span class="energy-efficiency-name-span">系统电量</span>
+            </div>
+            <div class="energy-efficiency-child">
+              <div><span class="energy-efficiency-value-span">20.00</span><span class="unit-span">%</span></div>
+              <span class="energy-efficiency-name-span">热平衡测试</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="param-div">
         <div class="text-container">
           <div class="blue-line"></div>
           <div class="title-head">系统运行参数</div>
+        </div>
+        <div class="data-container">
+          <div class="param-data-div">
+            <div class="energy-efficiency-child">
+              <div><span class="energy-efficiency-value-span">0.9</span><span class="unit-span">℃</span></div>
+              <span class="energy-efficiency-name-span">冷冻水温差</span>
+            </div>
+            <div class="energy-efficiency-child">
+              <div><span class="energy-efficiency-value-span">2.6</span><span class="unit-span">℃</span></div>
+              <span class="energy-efficiency-name-span">冷却水温差</span></div>
+            <div class="energy-efficiency-child">
+              <div><span class="energy-efficiency-value-span">8.6</span><span class="unit-span">℃</span></div>
+              <span class="energy-efficiency-name-span">冷冻供水温度</span></div>
+            <div class="energy-efficiency-child">
+              <div><span class="energy-efficiency-value-span">26.8</span><span class="unit-span">℃</span></div>
+              <span class="energy-efficiency-name-span">冷却回水温度</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -150,6 +192,46 @@ const getClass = (value: number) => {
 }
 </script>
 <style lang="scss" scoped>
+.param-data-div {
+  display: flex;
+  width: 100%;
+  height: 130px;
+  justify-content: center;
+}
+.energy-efficiency-name-span {
+  font-size: 12px;
+  color: #fcfbfb;
+  margin-top: 4px;
+}
+.energy-efficiency-value-span {
+  font-size: 24px;
+  color: #fcfbfb;
+}
+.unit-span {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-left: 6px;
+}
+.energy-efficiency-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+.energy-efficiency-right {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+}
+.energy-efficiency-child {
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .device-icon {
   margin-right: 8px;
 }
