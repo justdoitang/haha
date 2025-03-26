@@ -117,13 +117,16 @@
             </div>
             <div class="energy-efficiency-child">
               <div><span class="energy-efficiency-value-span">2.6</span><span class="unit-span">℃</span></div>
-              <span class="energy-efficiency-name-span">冷却水温差</span></div>
+              <span class="energy-efficiency-name-span">冷却水温差</span>
+            </div>
             <div class="energy-efficiency-child">
               <div><span class="energy-efficiency-value-span">8.6</span><span class="unit-span">℃</span></div>
-              <span class="energy-efficiency-name-span">冷冻供水温度</span></div>
+              <span class="energy-efficiency-name-span">冷冻供水温度</span>
+            </div>
             <div class="energy-efficiency-child">
               <div><span class="energy-efficiency-value-span">26.8</span><span class="unit-span">℃</span></div>
-              <span class="energy-efficiency-name-span">冷却回水温度</span></div>
+              <span class="energy-efficiency-name-span">冷却回水温度</span>
+            </div>
           </div>
         </div>
       </div>
@@ -192,6 +195,15 @@ const getClass = (value: number) => {
 }
 </script>
 <style lang="scss" scoped>
+:deep(.el-table) {
+  --el-table-border-color: transparent;
+}
+:deep(.el-table__body td) {
+  border-bottom: 1px solid #343d4c !important;
+}
+:deep(.el-table--enable-row-hover .el-table__body tr:hover > td) {
+  background-color: unset !important;
+}
 .param-data-div {
   display: flex;
   width: 100%;

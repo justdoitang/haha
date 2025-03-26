@@ -164,18 +164,26 @@ const labels = [
           :segments="segments"
           :labels="labels"
           unit="COP "
-          :width="800"
+          :width="700"
         />
       </el-card>
       <el-card class="pie-card">
         <div class="calendar-title"><p>分项图</p></div>
-        <div class="echarts-wrapper"><base-echart :option="echartsOption" :width="'600'" /></div>
+        <div class="echarts-wrapper"><base-echart :option="echartsOption"  width="600px" height="370px"/></div>
       </el-card>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.echarts-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 370px;
+  width: 100%;
+}
 :deep(.el-calendar-table thead th) {
   color: #000;
   font-size: 14px;
