@@ -3,11 +3,11 @@
     <div class="top-panel">
       <div class="info-div">
         <div class="text-container">
-          <div class="blue-line"></div>
+          <div class="blue-line" />
           <div class="title-head">楼宇信息</div>
         </div>
         <div class="data-container">
-          <div class="info-img-div"></div>
+          <div class="info-img-div" />
           <div class="info-data-div">
             <div class="info-data-time">
               <div class="time-logo">
@@ -41,7 +41,7 @@
       </div>
       <div class="energy-consumption-div">
         <div class="text-container">
-          <div class="blue-line"></div>
+          <div class="blue-line" />
           <div class="title-head">设备能效能耗</div>
         </div>
         <div class="data-container">
@@ -62,11 +62,11 @@
                   <span :class="getClass(row.actual)">{{ row.actual }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="reference" label="参考值" align="center"></el-table-column>
-              <el-table-column prop="reference" label="预警值" align="center"></el-table-column>
+              <el-table-column prop="reference" label="参考值" align="center" />
+              <el-table-column prop="reference" label="预警值" align="center" />
             </el-table-column>
             <el-table-column label="功率值（KW）" align="center">
-              <el-table-column prop="power" label="设备电耗值" align="center"></el-table-column>
+              <el-table-column prop="power" label="设备电耗值" align="center" />
             </el-table-column>
           </el-table>
         </div>
@@ -75,7 +75,7 @@
     <div class="middler-panel">
       <div class="energy-efficiency-div">
         <div class="text-container">
-          <div class="blue-line"></div>
+          <div class="blue-line" />
           <div class="title-head">系统整体能效</div>
         </div>
         <div class="data-container">
@@ -106,7 +106,7 @@
       </div>
       <div class="param-div">
         <div class="text-container">
-          <div class="blue-line"></div>
+          <div class="blue-line" />
           <div class="title-head">系统运行参数</div>
         </div>
         <div class="data-container">
@@ -134,13 +134,60 @@
     <div class="bottom-panel">
       <div class="energy-efficiency-rule-div">
         <div class="text-container">
-          <div class="blue-line"></div>
+          <div class="blue-line" />
           <div class="title-head">能效标尺</div>
+        </div>
+        <div class="data-container">
+          <div class="efficiency-ruler-container">
+            <!-- 当前能效值 -->
+            <div class="current-value">
+              <el-icon class="value-icon"><Place /></el-icon>
+              <span class="value-text">当前能效（{{ currentValue }}）</span>
+            </div>
+
+            <!-- COP 刻度 -->
+            <div class="cop-ticks">
+              <div
+                v-for="(tick, index) in copTicks"
+                :key="'cop' + index"
+                class="tick-wrapper"
+                :style="{ left: tick.position + '%' }"
+              >
+                <div class="tick-line" />
+                <div class="tick-value">{{ tick.value.toFixed(1) }}</div>
+              </div>
+            </div>
+
+            <!-- 颜色标尺 -->
+            <div class="color-ruler">
+              <div
+                v-for="(segment, index) in computedSegments"
+                :key="index"
+                class="color-segment"
+                :style="{ backgroundColor: segment.color, width: segment.width }"
+              >
+                <span class="segment-label">{{ segment.label }}</span>
+              </div>
+            </div>
+
+            <!-- KW/RT 刻度 -->
+            <div class="kwrt-ticks">
+              <div
+                v-for="(tick, index) in kwrtTicks"
+                :key="'kwrt' + index"
+                class="tick-wrapper"
+                :style="{ left: tick.position + '%' }"
+              >
+                <div class="tick-line" />
+                <div class="tick-value">{{ tick.value.toFixed(1) }}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="hot-div">
         <div class="text-container">
-          <div class="blue-line"></div>
+          <div class="blue-line" />
           <div class="title-head">热平衡标尺</div>
         </div>
       </div>
@@ -148,11 +195,49 @@
   </div>
 </template>
 <script lang="ts" setup>
-import ElementPlus from "element-plus"
-import "element-plus/dist/index.css"
+import { ref, computed } from "vue"
+import { Place } from "@element-plus/icons-vue"
 
-import { ref } from "vue"
+const props = defineProps({
+  currentValue: { type: Number, default: 6.55 }
+})
 
+// 颜色分段配置
+const computedSegments = computed(() => {
+  const totalRange = 7.0 - 3.0
+  return [
+    { min: 6.0, max: 7.0, color: "#0000FF", label: "优秀", width: "25%" },
+    { min: 5.0, max: 6.0, color: "#00FFFF", label: "良好", width: "25%" },
+    { min: 4.0, max: 5.0, color: "#D2B48C", label: "一般", width: "25%" },
+    { min: 3.0, max: 4.0, color: "#FFB6C1", label: "急需改善", width: "25%" }
+  ]
+})
+
+// COP 刻度（7.0-3.0）
+const copTicks = computed(() => {
+  const min = 3.0,
+    max = 7.0
+  return Array.from({ length: 9 }, (_, i) => {
+    const value = max - i * 0.5
+    return {
+      value,
+      position: ((max - value) / (max - min)) * 100
+    }
+  })
+})
+
+// KW/RT 刻度（0.5-1.2）
+const kwrtTicks = computed(() => {
+  const min = 0.5,
+    max = 1.2
+  return Array.from({ length: 8 }, (_, i) => {
+    const value = min + i * 0.1
+    return {
+      value,
+      position: ((value - min) / (max - min)) * 100
+    }
+  })
+})
 // 设备数据
 const deviceData = ref([
   {
@@ -195,6 +280,102 @@ const getClass = (value: number) => {
 }
 </script>
 <style lang="scss" scoped>
+.efficiency-ruler-container {
+  width: 600px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.current-value {
+  text-align: center;
+  margin-bottom: 30px;
+
+  .value-icon {
+    font-size: 28px;
+    color: #f56c6c;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .value-text {
+    font-size: 14px;
+    color: #666;
+  }
+}
+
+.color-ruler {
+  height: 30px;
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.color-segment {
+  height: 100%;
+  display: inline-block;
+  position: relative;
+
+  .segment-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* 通用刻度样式 */
+.cop-ticks,
+.kwrt-ticks {
+  position: relative;
+  height: 20px;
+}
+
+.tick-wrapper {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+/* COP 刻度在上方 */
+.cop-ticks {
+  margin-bottom: 5px;
+
+  .tick-line {
+    height: 15px;
+    border-left: 1px solid #fff;
+  }
+
+  .tick-value {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #666;
+  }
+}
+
+/* KW/RT 刻度在下方 */
+.kwrt-ticks {
+  margin-top: 5px;
+
+  .tick-line {
+    height: 15px;
+    border-left: 1px solid #fff;
+  }
+
+  .tick-value {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #666;
+  }
+}
+
 :deep(.el-table) {
   --el-table-border-color: transparent;
 }
