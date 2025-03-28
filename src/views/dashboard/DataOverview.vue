@@ -142,7 +142,7 @@
             <!-- 当前能效值 -->
             <div class="current-value">
               <span class="value-text">当前能效（{{ currentValue }}）</span>
-              <el-icon class="value-icon"><Place /></el-icon>
+              <el-icon class="value-icon"><LocationFilled /></el-icon>
             </div>
 
             <!-- 颜色标尺 -->
@@ -165,7 +165,8 @@
                 :style="{ left: tick.position + '%' }"
               >
                 <div class="tick-line" />
-                <div class="tick-value">{{ tick.value.toFixed(1) }}</div>
+                <div class="tick-value">({{ tick.value.toFixed(1) }})</div>
+                <div class="tick-value1">({{ tick.value.toFixed(1) }})</div>
               </div>
             </div>
 
@@ -205,10 +206,10 @@ const props = defineProps({
 const computedSegments = computed(() => {
   const totalRange = 7.0 - 3.0
   return [
-    { min: 6.0, max: 7.0, color: "#0000FF", label: "优秀", width: "25%" },
-    { min: 5.0, max: 6.0, color: "#00FFFF", label: "良好", width: "25%" },
-    { min: 4.0, max: 5.0, color: "#D2B48C", label: "一般", width: "25%" },
-    { min: 3.0, max: 4.0, color: "#FFB6C1", label: "急需改善", width: "25%" }
+    { min: 6.0, max: 7.0, color: "#528ced", label: "优秀", width: "25%" },
+    { min: 5.0, max: 6.0, color: "#3dd6c1", label: "良好", width: "25%" },
+    { min: 4.0, max: 5.0, color: "#e4bb3b", label: "一般", width: "25%" },
+    { min: 3.0, max: 4.0, color: "#ef5287", label: "急需改善", width: "25%" }
   ]
 })
 
@@ -286,24 +287,23 @@ const getClass = (value: number) => {
 }
 
 .current-value {
-  text-align: center;
-  margin-bottom: 30px;
-
   .value-icon {
     font-size: 28px;
-    color: #f56c6c;
+    color: #528ced;
     display: block;
-    margin-bottom: 5px;
+    // transform: scale(0.8, 1.4); /* 水平80%，垂直140% */
+    // transform-origin: center;
   }
 
   .value-text {
     font-size: 14px;
     color: #666;
+    display: block;
   }
 }
 
 .color-ruler {
-  height: 30px;
+  height: 36px;
   position: relative;
   border-radius: 2px;
   overflow: hidden;
@@ -320,7 +320,7 @@ const getClass = (value: number) => {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 12px;
+    font-size: 14px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
 }
@@ -337,12 +337,11 @@ const getClass = (value: number) => {
   transform: translateX(-50%);
 }
 
-/* COP 刻度在上方 */
 .cop-ticks {
   margin-bottom: 5px;
 
   .tick-line {
-    height: 15px;
+    height: 20px;
     border-left: 1px solid #fff;
   }
 
@@ -351,28 +350,18 @@ const getClass = (value: number) => {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 10px;
-    color: #666;
+    font-size: 16px;
+    color: #fcfbfb;
     margin-top: 20px;
   }
-}
-
-/* KW/RT 刻度在下方 */
-.kwrt-ticks {
-  margin-top: 5px;
-
-  .tick-line {
-    height: 15px;
-    border-left: 1px solid #fff;
-  }
-
-  .tick-value {
+  .tick-value1 {
     position: absolute;
-    bottom: 100%;
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 10px;
-    color: #666;
+    font-size: 16px;
+    color: #fcfbfb;
+    margin-top: 40px;
   }
 }
 
