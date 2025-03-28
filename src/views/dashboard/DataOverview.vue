@@ -141,21 +141,8 @@
           <div class="efficiency-ruler-container">
             <!-- 当前能效值 -->
             <div class="current-value">
-              <el-icon class="value-icon"><Place /></el-icon>
               <span class="value-text">当前能效（{{ currentValue }}）</span>
-            </div>
-
-            <!-- COP 刻度 -->
-            <div class="cop-ticks">
-              <div
-                v-for="(tick, index) in copTicks"
-                :key="'cop' + index"
-                class="tick-wrapper"
-                :style="{ left: tick.position + '%' }"
-              >
-                <div class="tick-line" />
-                <div class="tick-value">{{ tick.value.toFixed(1) }}</div>
-              </div>
+              <el-icon class="value-icon"><Place /></el-icon>
             </div>
 
             <!-- 颜色标尺 -->
@@ -169,9 +156,21 @@
                 <span class="segment-label">{{ segment.label }}</span>
               </div>
             </div>
+            <!-- COP 刻度 -->
+            <div class="cop-ticks">
+              <div
+                v-for="(tick, index) in copTicks"
+                :key="'cop' + index"
+                class="tick-wrapper"
+                :style="{ left: tick.position + '%' }"
+              >
+                <div class="tick-line" />
+                <div class="tick-value">{{ tick.value.toFixed(1) }}</div>
+              </div>
+            </div>
 
             <!-- KW/RT 刻度 -->
-            <div class="kwrt-ticks">
+            <!-- <div class="kwrt-ticks">
               <div
                 v-for="(tick, index) in kwrtTicks"
                 :key="'kwrt' + index"
@@ -181,7 +180,7 @@
                 <div class="tick-line" />
                 <div class="tick-value">{{ tick.value.toFixed(1) }}</div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -199,7 +198,7 @@ import { ref, computed } from "vue"
 import { Place } from "@element-plus/icons-vue"
 
 const props = defineProps({
-  currentValue: { type: Number, default: 6.55 }
+  currentValue: { type: Number, default: 3.55 }
 })
 
 // 颜色分段配置
@@ -354,6 +353,7 @@ const getClass = (value: number) => {
     transform: translateX(-50%);
     font-size: 10px;
     color: #666;
+    margin-top: 20px;
   }
 }
 
