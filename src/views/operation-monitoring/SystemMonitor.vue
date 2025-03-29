@@ -32,7 +32,30 @@
         <span style="font-size: 14px">目标值:</span><span style="margin-left: 8px"> 20.0 ℃</span>
       </div>
     </div>
-    <div class="right-top-container">右上</div>
+    <!-- 运行参数 -->
+    <div class="right-top-container">
+      <div class="operating-parameters">
+        <div class="operating-parameters-title">运行参数</div>
+        <div class="operating-parameters-content">
+          <div class="operating-parameters-content-child">
+            <span class="operating-parameters-value">8.5</span>
+            <span class="operating-parameters-name">冷却供水温度℃</span>
+          </div>
+          <div class="operating-parameters-content-child">
+            <span class="operating-parameters-value">1.0</span>
+            <span class="operating-parameters-name">冷冻水温差℃</span>
+          </div>
+          <div class="operating-parameters-content-child">
+            <span class="operating-parameters-value">28.2</span>
+            <span class="operating-parameters-name">冷却回水温度℃</span>
+          </div>
+          <div class="operating-parameters-content-child">
+            <span class="operating-parameters-value">2.6</span>
+            <span class="operating-parameters-name">冷却水温差℃</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="right-middle-container">右中</div>
     <div class="right-bottom-container">右下</div>
 
@@ -118,6 +141,7 @@ const handleDeviceClick = (device) => {
   height: 800px;
   user-select: none;
   margin-top: 20px;
+  margin-right: 110px;
 }
 .hotspot {
   position: absolute;
@@ -151,7 +175,7 @@ const handleDeviceClick = (device) => {
   flex-direction: column;
   position: absolute;
   transition: all 0.2s;
-  left: 30px;
+  left: -30px;
   top: 240px;
   width: 250px;
   height: 200px;
@@ -168,7 +192,7 @@ const handleDeviceClick = (device) => {
   margin-top: 4px;
 }
 .right-top-container {
-  background-image: url("../../assets/system-monitor/lan3.jpg");
+  // background-image: url("../../assets/system-monitor/lan3.jpg");
   background-size: cover;
   position: absolute;
   cursor: pointer;
@@ -203,5 +227,42 @@ const handleDeviceClick = (device) => {
 .device-container {
   background-image: url("../../assets/system-monitor/haier.png");
   background-size: cover;
+}
+.operating-parameters {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.operating-parameters-title {
+  width: 100%;
+  height: 30px;
+  // background-color: #273341;
+  color: #fbfbfb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.operating-parameters-content {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 2;
+}
+.operating-parameters-content-child {
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fbfbfb;
+}
+.operating-parameters-value {
+  font-size: 28px;
+  color: #f0d804;
+}
+.operating-parameters-name {
+  font-size: 12px;
 }
 </style>
