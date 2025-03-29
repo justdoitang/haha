@@ -36,8 +36,8 @@
     <div class="right-middle-container">右中</div>
     <div class="right-bottom-container">右下</div>
 
-    <el-dialog v-model="dialogVisible" :title="currentDevice?.name" width="30%">
-      <div v-if="currentDevice">
+    <el-dialog v-model="dialogVisible" :title="currentDevice?.name" width="60%">
+      <div class="device-container" v-if="currentDevice">
         <p>设备ID：{{ currentDevice.id }}</p>
         <p>状态：{{ currentDevice.status }}</p>
         <p>位置：X:{{ currentDevice.x }} Y:{{ currentDevice.y }}</p>
@@ -141,7 +141,7 @@ const handleDeviceClick = (device) => {
   font-size: 16px;
   color: #fbfbfb;
 }
-.top-switch-div{
+.top-switch-div {
   margin-left: 20px;
 }
 .left-top-container {
@@ -178,7 +178,7 @@ const handleDeviceClick = (device) => {
   width: 260px;
   height: 180px;
 }
-.right-middle-container{
+.right-middle-container {
   background-image: url("../../assets/system-monitor/lan3.jpg");
   background-size: cover;
   position: absolute;
@@ -189,7 +189,7 @@ const handleDeviceClick = (device) => {
   width: 260px;
   height: 280px;
 }
-.right-bottom-container{
+.right-bottom-container {
   background-image: url("../../assets/system-monitor/lan3.jpg");
   background-size: cover;
   position: absolute;
@@ -199,5 +199,9 @@ const handleDeviceClick = (device) => {
   top: 700px;
   width: 260px;
   height: 180px;
+}
+.device-container {
+  background-image: url("../../assets/system-monitor/haier.png");
+  background-size: cover;
 }
 </style>

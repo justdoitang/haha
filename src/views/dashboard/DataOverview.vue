@@ -219,9 +219,12 @@ const copTicks = computed(() => {
     max = 7.0
   return Array.from({ length: 9 }, (_, i) => {
     const value = max - i * 0.5
+    let positionValue = ((max - value) / (max - min)) * 100
+    if (i == 0) positionValue += 2
+    if (i == 8) positionValue -= 2
     return {
       value,
-      position: ((max - value) / (max - min)) * 100
+      position: positionValue
     }
   })
 })
