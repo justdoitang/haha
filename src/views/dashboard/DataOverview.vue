@@ -166,7 +166,7 @@
               >
                 <div class="tick-line" />
                 <div class="tick-value">({{ tick.value.toFixed(1) }})</div>
-                <div class="tick-value1">({{ tick.value.toFixed(1) }})</div>
+                <!-- <div class="tick-value1">({{ tick.value.toFixed(1) }})</div> -->
               </div>
             </div>
 
@@ -190,6 +190,38 @@
           <div class="blue-line" />
           <div class="title-head">热平衡标尺</div>
         </div>
+        <div class="data-container">
+          <div class="efficiency-ruler-container">
+            <!-- 当前能效值 -->
+            <div class="hot-current-value">
+              <span class="value-text">当前热平衡率（{{ hotValue }}%）</span>
+              <el-icon class="value-icon"><LocationFilled /></el-icon>
+            </div>
+
+            <!-- 颜色标尺 -->
+            <div class="color-ruler">
+              <div
+                v-for="(segment, index) in hotComputedSegments"
+                :key="index"
+                class="color-segment"
+                :style="{ backgroundColor: segment.color, width: segment.width }"
+              >
+              </div>
+            </div>
+            <!-- COP 刻度 -->
+            <div class="cop-ticks">
+              <div
+                v-for="(tick, index) in hotTicks"
+                :key="'cop' + index"
+                class="tick-wrapper"
+                :style="{ left: tick.position + '%' }"
+              >
+                <div class="tick-line" />
+                <div class="tick-value">{{ tick.value.toFixed(1) }}%</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -199,7 +231,8 @@ import { ref, computed } from "vue"
 import { Place } from "@element-plus/icons-vue"
 
 const props = defineProps({
-  currentValue: { type: Number, default: 3.55 }
+  currentValue: { type: Number, default: 3.55 },
+  hotValue: { type: Number, default: 8.0 }
 })
 
 // 颜色分段配置
@@ -213,6 +246,18 @@ const computedSegments = computed(() => {
   ]
 })
 
+const hotComputedSegments = computed(() => {
+  const totalRange = -15.0 - 15.0
+  return [
+    { min: -15.0, max: -10.0, color: "#ef5287", width: "27.27%" },
+    { min: -5.0, max: 0.0, color: "#e4bb3b", width: "9.09%" },
+    { min: 5.0, max: 10.0, color: "#3dd6c1", width: "27.27%" },
+    { min: 10.0, max: 15.0, color: "#e4bb3b", width: "9.09%" },
+    { min: 15.0, max: 15.0, color: "#ef5287", width: "27.27%" }
+  ]
+})
+
+
 // COP 刻度（7.0-3.0）
 const copTicks = computed(() => {
   const min = 3.0,
@@ -222,6 +267,22 @@ const copTicks = computed(() => {
     let positionValue = ((max - value) / (max - min)) * 100
     if (i == 0) positionValue += 2
     if (i == 8) positionValue -= 2
+    return {
+      value,
+      position: positionValue
+    }
+  })
+})
+
+// COP 刻度（7.0-3.0）
+const hotTicks = computed(() => {
+  const min = -15.0,
+    max = 15.0
+  return Array.from({ length: 7 }, (_, i) => {
+    const value = max - i * 5
+    let positionValue = ((max - value) / (max - min)) * 100
+    if (i == 0) positionValue += 2
+    if (i == 6) positionValue -= 2
     return {
       value,
       position: positionValue
@@ -287,6 +348,23 @@ const getClass = (value: number) => {
   width: 600px;
   margin: 20px auto;
   position: relative;
+}
+
+.hot-current-value {
+  margin-left: 430px;
+  .value-icon {
+    font-size: 28px;
+    color: #ef5287;
+    display: block;
+    // transform: scale(0.8, 1.4); /* 水平80%，垂直140% */
+    // transform-origin: center;
+  }
+
+  .value-text {
+    font-size: 14px;
+    color: #666;
+    display: block;
+  }
 }
 
 .current-value {
