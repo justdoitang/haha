@@ -12,10 +12,10 @@
     />
     <!-- 顶部开关 -->
     <div class="top-switch-container">
-      <div class="top-switch-div">设备一键启动: <el-switch /></div>
-      <div class="top-switch-div">冷却逼近度开关: <el-switch /></div>
-      <div class="top-switch-div">自动加减机开关: <el-switch /></div>
-      <div class="top-switch-div">自动加减塔开关: <el-switch /></div>
+      <div class="top-switch-div">设备一键启动: <el-switch v-model="deviceOneClickStart"/></div>
+      <div class="top-switch-div">冷却逼近度开关: <el-switch v-model="coolingApproximation"/></div>
+      <div class="top-switch-div">自动加减机开关: <el-switch v-model="additiveAndReducer"/></div>
+      <div class="top-switch-div">自动加减塔开关: <el-switch v-model="additiveAndReducerTower"/></div>
     </div>
     <!-- 左上数值 -->
     <div class="left-top-container">
@@ -34,8 +34,8 @@
     </div>
     <!-- 运行参数 -->
     <div class="right-top-container">
-      <div class="operating-parameters">
-        <div class="operating-parameters-title">运行参数</div>
+      <div class="right-data-container">
+        <div class="right-data-title">运行参数</div>
         <div class="operating-parameters-content">
           <div class="operating-parameters-content-child">
             <span class="operating-parameters-value">8.5</span>
@@ -56,15 +56,73 @@
         </div>
       </div>
     </div>
-    <div class="right-middle-container">右中</div>
-    <div class="right-bottom-container">右下</div>
+    <div class="right-middle-container">
+      <div class="right-data-container">
+        <div class="right-data-title" style="margin-top: 8px">系统能效</div>
+        <div class="operating-parameters-content">
+          <div class="operating-parameters-content-child">
+            <span class="operating-parameters-value">1080.65</span>
+            <span class="operating-parameters-name">制冷量kw</span>
+          </div>
+          <div class="operating-parameters-content-child">
+            <span class="operating-parameters-value">186.11</span>
+            <span class="operating-parameters-name">电量kw</span>
+          </div>
+          <div class="operating-parameters-content-child">
+            <span class="operating-parameters-value">886.9</span>
+            <span class="operating-parameters-name">散热量kw</span>
+          </div>
+          <div class="operating-parameters-content-child">
+            <span class="operating-parameters-value">13.14</span>
+            <span class="operating-parameters-name">热平衡率%</span>
+          </div>
+        </div>
+        <div class="system-efficiency-level">
+          <span style="color: #fbfbfb; margin-right: 8px">能效等级</span>
+          <span style="color: #f0d804; margin-left: 8px">一级</span>
+        </div>
+        <div class="system-efficiency-ruler"></div>
+      </div>
+    </div>
+    <div class="right-bottom-container">
+      <div class="right-data-container">
+        <div class="right-data-title">分项能效</div>
+        <div class="item-efficiency-content">
+          <div class="item-efficiency-content-child">
+            <div class="item-efficiency-name">主机</div>
+            <div class="item-efficiency-value">12.96</div>
+            <div class="item-efficiency-progress">
+              <el-progress :stroke-width="12" :percentage="100" :show-text="false" />
+            </div>
+          </div>
+          <div class="item-efficiency-content-child">
+            <div class="item-efficiency-name">冷冻泵</div>
+            <div class="item-efficiency-value">14.00</div>
+            <div class="item-efficiency-progress">
+              <el-progress :stroke-width="12" :percentage="30" :show-text="false" />
+            </div>
+          </div>
+          <div class="item-efficiency-content-child">
+            <div class="item-efficiency-name">冷却泵</div>
+            <div class="item-efficiency-value">100.05</div>
+            <div class="item-efficiency-progress">
+              <el-progress :stroke-width="12" :percentage="80" :show-text="false" />
+            </div>
+          </div>
+          <div class="item-efficiency-content-child">
+            <div class="item-efficiency-name">冷却塔</div>
+            <div class="item-efficiency-value">0.00</div>
+            <div class="item-efficiency-progress">
+              <el-progress :stroke-width="12" :percentage="0" :show-text="false" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <el-dialog v-model="dialogVisible" :title="currentDevice?.name" width="60%">
+    <el-dialog v-model="dialogVisible" width="60%">
       <div class="device-container" v-if="currentDevice">
-        <p>设备ID：{{ currentDevice.id }}</p>
-        <p>状态：{{ currentDevice.status }}</p>
-        <p>位置：X:{{ currentDevice.x }} Y:{{ currentDevice.y }}</p>
-        <p>描述：{{ currentDevice.description }}</p>
+
       </div>
     </el-dialog>
   </div>
@@ -72,6 +130,11 @@
 
 <script lang="ts" setup>
 import { ref } from "vue"
+
+const deviceOneClickStart = ref(true);
+const coolingApproximation = ref(false);
+const additiveAndReducer = ref(true);
+const additiveAndReducerTower = ref(true);
 
 // 设备数据示例
 const devices = ref([
@@ -130,6 +193,7 @@ const handleDeviceClick = (device) => {
   display: flex;
   align-content: center;
   justify-content: center;
+  overflow: hidden;
   width: 1680px;
   height: 840px;
   margin: 10px;
@@ -138,10 +202,9 @@ const handleDeviceClick = (device) => {
 .base-image {
   display: flex;
   width: 1300px;
-  height: 800px;
+  height: 1000px;
   user-select: none;
-  margin-top: 20px;
-  margin-right: 110px;
+  margin-right: 180px;
 }
 .hotspot {
   position: absolute;
@@ -192,63 +255,63 @@ const handleDeviceClick = (device) => {
   margin-top: 4px;
 }
 .right-top-container {
-  // background-image: url("../../assets/system-monitor/lan3.jpg");
-  background-size: cover;
+  background: url("../../assets/system-monitor/baikuang2.png") center/100% 100%;
   position: absolute;
   cursor: pointer;
   transition: all 0.2s;
-  left: 1400px;
+  left: 1360px;
   top: 100px;
-  width: 260px;
-  height: 180px;
+  width: 300px;
+  height: 200px;
 }
 .right-middle-container {
-  background-image: url("../../assets/system-monitor/lan3.jpg");
-  background-size: cover;
+  background: url("../../assets/system-monitor/baikuang2.png") center/100% 100%;
   position: absolute;
   cursor: pointer;
   transition: all 0.2s;
-  left: 1400px;
-  top: 340px;
-  width: 260px;
-  height: 280px;
+  left: 1360px;
+  top: 320px;
+  width: 300px;
+  height: 340px;
 }
 .right-bottom-container {
-  background-image: url("../../assets/system-monitor/lan3.jpg");
-  background-size: cover;
+  background: url("../../assets/system-monitor/baikuang2.png") center/100% 100%;
   position: absolute;
   cursor: pointer;
   transition: all 0.2s;
-  left: 1400px;
-  top: 700px;
-  width: 260px;
-  height: 180px;
+  left: 1360px;
+  top: 680px;
+  width: 300px;
+  height: 200px;
 }
 .device-container {
   background-image: url("../../assets/system-monitor/haier.png");
   background-size: cover;
 }
-.operating-parameters {
+.right-data-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   width: 100%;
   height: 100%;
 }
-.operating-parameters-title {
+.right-data-title {
+  flex: 1;
   width: 100%;
   height: 30px;
-  // background-color: #273341;
   color: #fbfbfb;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
+  font-size: 14px;
+  color: #7d8383;
+  letter-spacing: 8px;
 }
 .operating-parameters-content {
   display: flex;
   flex-wrap: wrap;
   flex: 2;
+  margin-bottom: 12px;
 }
 .operating-parameters-content-child {
   flex: 1 1 50%;
@@ -263,6 +326,51 @@ const handleDeviceClick = (device) => {
   color: #f0d804;
 }
 .operating-parameters-name {
+  font-size: 10px;
+}
+.system-efficiency-level {
+  flex: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  margin-left: 12px;
+  margin-right: 22px;
+  align-content: center;
+  font-size: 14px;
+}
+
+.system-efficiency-ruler {
+  flex: 2;
+}
+.item-efficiency-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  margin-right: 28px;
+}
+.item-efficiency-content-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fbfbfb;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.item-efficiency-progress {
+  flex: 2;
+  margin-left: 12px;
+}
+.item-efficiency-name{
+  flex: 1;
+  font-size: 13px;
+  font-weight: bold;
+}
+.item-efficiency-value{
+  flex: 0.5;
   font-size: 12px;
+  color: #f0d804;
+  font-weight: bold;
 }
 </style>

@@ -43,6 +43,7 @@ interface Label {
 }
 
 interface Segment {
+  threshold: number
   text: string
   color: string
 }
