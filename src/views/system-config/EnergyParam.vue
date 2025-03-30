@@ -44,7 +44,7 @@ const formRules: FormRules = {
 
 const getEnergyParamData = () => {
   getEnergyParamApi()
-    .then((data) => {
+    .then((data: any) => {
       console.log(data)
       formData.value = data.Content[0]
       btnName.value = formData.value.Id === undefined ? "新增电价内容" : "更新电价内容"
@@ -56,7 +56,7 @@ const getEnergyParamData = () => {
 }
 
 const handleCreateOrUpdate = () => {
-  formRef.value?.validate((valid: boolean, fields) => {
+  formRef.value?.validate((valid: boolean, fields: any) => {
     console.log(valid)
     if (!valid) return console.error("表单校验不通过", fields)
     const api = formData.value.Id === undefined ? addEnergyParamApi : uptEnergyParamApi

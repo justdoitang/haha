@@ -12,10 +12,10 @@
     />
     <!-- 顶部开关 -->
     <div class="top-switch-container">
-      <div class="top-switch-div">设备一键启动: <el-switch v-model="deviceOneClickStart"/></div>
-      <div class="top-switch-div">冷却逼近度开关: <el-switch v-model="coolingApproximation"/></div>
-      <div class="top-switch-div">自动加减机开关: <el-switch v-model="additiveAndReducer"/></div>
-      <div class="top-switch-div">自动加减塔开关: <el-switch v-model="additiveAndReducerTower"/></div>
+      <div class="top-switch-div">设备一键启动: <el-switch v-model="deviceOneClickStart" /></div>
+      <div class="top-switch-div">冷却逼近度开关: <el-switch v-model="coolingApproximation" /></div>
+      <div class="top-switch-div">自动加减机开关: <el-switch v-model="additiveAndReducer" /></div>
+      <div class="top-switch-div">自动加减塔开关: <el-switch v-model="additiveAndReducerTower" /></div>
     </div>
     <!-- 左上数值 -->
     <div class="left-top-container">
@@ -121,9 +121,7 @@
     </div>
 
     <el-dialog v-model="dialogVisible" width="60%">
-      <div class="device-container" v-if="currentDevice">
-
-      </div>
+      <div class="device-container" v-if="currentDevice"></div>
     </el-dialog>
   </div>
 </template>
@@ -131,10 +129,10 @@
 <script lang="ts" setup>
 import { ref } from "vue"
 
-const deviceOneClickStart = ref(true);
-const coolingApproximation = ref(false);
-const additiveAndReducer = ref(true);
-const additiveAndReducerTower = ref(true);
+const deviceOneClickStart = ref(true)
+const coolingApproximation = ref(false)
+const additiveAndReducer = ref(true)
+const additiveAndReducerTower = ref(true)
 
 // 设备数据示例
 const devices = ref([
@@ -165,7 +163,7 @@ const dialogVisible = ref(false)
 const currentDevice = ref(null)
 
 // 计算热点区域样式
-const getHotspotStyle = (device) => {
+const getHotspotStyle = (device: any) => {
   return {
     left: `${device.x}px`,
     top: `${device.y}px`,
@@ -175,7 +173,7 @@ const getHotspotStyle = (device) => {
 }
 
 // 点击设备处理
-const handleDeviceClick = (device) => {
+const handleDeviceClick = (device: any) => {
   currentDevice.value = device
   dialogVisible.value = true
 }
@@ -362,12 +360,12 @@ const handleDeviceClick = (device) => {
   flex: 2;
   margin-left: 12px;
 }
-.item-efficiency-name{
+.item-efficiency-name {
   flex: 1;
   font-size: 13px;
   font-weight: bold;
 }
-.item-efficiency-value{
+.item-efficiency-value {
   flex: 0.5;
   font-size: 12px;
   color: #f0d804;

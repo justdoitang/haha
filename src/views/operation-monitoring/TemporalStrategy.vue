@@ -10,11 +10,11 @@ defineOptions({
 })
 const options = [
   {
-    value: false,
+    value: 0,
     label: "否"
   },
   {
-    value: true,
+    value: 1,
     label: "是"
   }
 ]

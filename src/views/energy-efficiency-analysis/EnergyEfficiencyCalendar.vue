@@ -93,10 +93,10 @@ const dealMyDate = (v: any) => {
 }
 
 const segments = [
-  { text: "优秀", color: "#4caf50" }, // green
-  { text: "良好", color: "#8bc34a" }, // light green
-  { text: "一般", color: "#ffeb3b" }, // yellow
-  { text: "为略改进", color: "#f44336" } // red
+  { text: "优秀", color: "#4caf50", threshold: 100 }, // green
+  { text: "良好", color: "#8bc34a", threshold: 100 }, // light green
+  { text: "一般", color: "#ffeb3b" , threshold: 100}, // yellow
+  { text: "为略改进", color: "#f44336", threshold: 100 } // red
 ]
 const labels = [
   { cop: 7.0, kwrt: 0.5, value: 0 },
@@ -169,14 +169,14 @@ const labels = [
       </el-card>
       <el-card class="pie-card">
         <div class="calendar-title"><p>分项图</p></div>
-        <div class="echarts-wrapper"><base-echart :option="echartsOption"  width="600px" height="370px"/></div>
+        <div class="echarts-wrapper"><base-echart :option="echartsOption" width="600px" height="370px" /></div>
       </el-card>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.echarts-wrapper{
+.echarts-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
