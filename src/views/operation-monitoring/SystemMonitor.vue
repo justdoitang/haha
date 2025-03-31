@@ -1,7 +1,7 @@
 <template>
   <div class="device-container">
     <div class="img-bottom-color">
-      <img src="@/assets/system-monitor/white.jpg" alt="设备分布图" class="base-image" />
+      <img src="@/assets/system-monitor/new.png" alt="设备分布图" class="base-image" />
     </div>
     <div
       v-for="device in devices"
