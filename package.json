@@ -31,6 +31,7 @@
     "path-to-regexp": "6.2.2",
     "pinia": "2.1.7",
     "screenfull": "6.0.2",
+    "vite-plugin-imagemin": "^0.6.1",
     "vue": "3.4.27",
     "vue-router": "4.3.2",
     "vxe-table": "4.6.17",

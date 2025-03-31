@@ -35,8 +35,8 @@ const loginFormRules: FormRules = {
 /** 登录逻辑 */
 const handleLogin = () => {
   loginFormRef.value?.validate((valid: boolean, fields: any) => {
-
-    loading.value = true
+    if (valid) {
+      loading.value = true
       useUserStore()
         .login(loginFormData)
         .then(() => {
@@ -48,22 +48,9 @@ const handleLogin = () => {
         .finally(() => {
           loading.value = false
         })
-    // if (valid) {
-    //   loading.value = true
-    //   useUserStore()
-    //     .login(loginFormData)
-    //     .then(() => {
-    //       router.push({ path: "/" })
-    //     })
-    //     .catch(() => {
-    //       loginFormData.password = ""
-    //     })
-    //     .finally(() => {
-    //       loading.value = false
-    //     })
-    // } else {
-    //   console.error("表单校验不通过", fields)
-    // }
+    } else {
+      console.error("表单校验不通过", fields)
+    }
   })
 }
 /** 创建验证码 */

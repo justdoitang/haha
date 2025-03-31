@@ -547,7 +547,6 @@ const getClass = (value: number) => {
   height: 240px;
   background-image: url("../../assets/data-overview/lou.jpg");
   background-size: cover;
-  transition: all 0.1s;
 }
 .hot-div {
   flex: 1;
