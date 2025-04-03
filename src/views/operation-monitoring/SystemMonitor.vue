@@ -1,7 +1,7 @@
 <template>
   <div class="device-container">
     <div class="img-bottom-color">
-      <img src="@/assets/system-monitor/new.png" alt="设备分布图" class="base-image" />
+      <img src="@/assets/system-monitor/white.png" alt="设备分布图" class="base-image" />
     </div>
     <div
       v-for="device in devices"
@@ -281,10 +281,6 @@ const handleDeviceClick = (device: any) => {
   top: 680px;
   width: 300px;
   height: 200px;
-}
-.device-container {
-  background-image: url("../../assets/system-monitor/haier.png");
-  background-size: cover;
 }
 .right-data-container {
   display: flex;
