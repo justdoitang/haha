@@ -32,6 +32,14 @@
         <span style="font-size: 14px">目标值:</span><span style="margin-left: 8px"> 20.0 ℃</span>
       </div>
     </div>
+    <div class="left-bottom-container">
+      <div class="status-legend">
+        <div class="legend-item" v-for="(item, index) in legends" :key="index">
+          <span :class="['status-dot', item.color]"></span>
+          <span class="legend-text">{{ item.label }}</span>
+        </div>
+      </div>
+    </div>
     <!-- 运行参数 -->
     <div class="right-top-container">
       <div class="right-data-container">
@@ -127,12 +135,23 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
+import { ref, reactive } from "vue"
 
 const deviceOneClickStart = ref(true)
 const coolingApproximation = ref(false)
 const additiveAndReducer = ref(true)
 const additiveAndReducerTower = ref(true)
+
+interface Legend {
+  label: string
+  color: string
+}
+
+const legends: Legend[] = reactive([
+  { label: "设备运行", color: "green" },
+  { label: "设备停止", color: "blue" },
+  { label: "设备故障", color: "red" }
+])
 
 // 设备数据示例
 const devices = ref([
@@ -180,6 +199,43 @@ const handleDeviceClick = (device: any) => {
 </script>
 
 <style lang="scss" scoped>
+.status-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* 控制图例之间的间距 */
+  padding: 10px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+.status-dot {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.status-dot.green {
+  background-color: #00ff00;
+}
+
+.status-dot.blue {
+  background-color: #fffe4c;
+}
+
+.status-dot.red {
+  background-color: #ff4040;
+}
+
+.layout-footer {
+  background-color: black !important;
+  color: white !important;
+}
 .device-container {
   display: flex;
   align-content: center;
@@ -192,17 +248,18 @@ const handleDeviceClick = (device: any) => {
   align-content: center;
   justify-content: center;
   overflow: hidden;
-  width: 1680px;
-  height: 840px;
+  min-width: 1680px;
+  height: 820px;
   margin: 10px;
 }
 
 .base-image {
   display: flex;
-  width: 1300px;
-  height: 1000px;
+  // width: 1900px;
+  // height: 820px;
   user-select: none;
   margin-right: 180px;
+  margin-top: 30px;
 }
 .hotspot {
   position: absolute;
@@ -235,12 +292,23 @@ const handleDeviceClick = (device: any) => {
   align-items: center;
   flex-direction: column;
   position: absolute;
-  transition: all 0.2s;
   left: -30px;
   top: 240px;
   width: 250px;
   height: 200px;
   color: #fbfbfb;
+}
+.left-bottom-container {
+  display: flex;
+  position: absolute;
+  left: 36px;
+  top: 830px;
+  width: 800px;
+  height: 36px;
+}
+.left-bottom-status-div {
+  background-color: #f0d804;
+  width: 150px;
 }
 .left-top-div {
   margin: 12px;
@@ -257,8 +325,8 @@ const handleDeviceClick = (device: any) => {
   position: absolute;
   cursor: pointer;
   transition: all 0.2s;
-  left: 1360px;
-  top: 100px;
+  left: 1380px;
+  top: 88px;
   width: 300px;
   height: 200px;
 }
@@ -267,8 +335,8 @@ const handleDeviceClick = (device: any) => {
   position: absolute;
   cursor: pointer;
   transition: all 0.2s;
-  left: 1360px;
-  top: 320px;
+  left: 1380px;
+  top: 310px;
   width: 300px;
   height: 340px;
 }
@@ -277,8 +345,8 @@ const handleDeviceClick = (device: any) => {
   position: absolute;
   cursor: pointer;
   transition: all 0.2s;
-  left: 1360px;
-  top: 680px;
+  left: 1380px;
+  top: 670px;
   width: 300px;
   height: 200px;
 }
