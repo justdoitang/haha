@@ -32,6 +32,7 @@
         <span style="font-size: 14px">目标值:</span><span style="margin-left: 8px"> 20.0 ℃</span>
       </div>
     </div>
+    <!-- 状态描述 -->
     <div class="left-bottom-container">
       <div class="status-legend">
         <div class="legend-item" v-for="(item, index) in legends" :key="index">
@@ -157,25 +158,48 @@ const legends: Legend[] = reactive([
 const devices = ref([
   {
     id: 1,
-    x: 600, // X坐标
-    y: 650, // Y坐标
-    width: 40,
-    height: 40,
+    x: 417, // X坐标
+    y: 542, // Y坐标
+    width: 198,
+    height: 62,
+    picturePath: "src/assets/system-monitor/yellow24277.jpg",
     name: "主电机",
     status: "正常",
     description: "2000W交流电机"
+  },
+  {
+    id: 2,
+    x: 397,
+    y: 148,
+    width: 189,
+    height: 239,
+    picturePath: "src/assets/system-monitor/red189239.jpg",
+    name: "传感器",
+    status: "警告",
+    description: "温度传感器"
+  },
+  {
+    id: 3,
+    x: 405, // X坐标
+    y: 660, // Y坐标
+    width: 207,
+    height: 89,
+    picturePath: "src/assets/system-monitor/green20789.jpg",
+    name: "传感器",
+    status: "警告",
+    description: "温度传感器"
+  },
+  {
+    id: 5,
+    x: 574, // X坐标
+    y: 150, // Y坐标
+    width: 193,
+    height: 226,
+    picturePath: "src/assets/system-monitor/green193226.jpg",
+    name: "传感器",
+    status: "警告",
+    description: "温度传感器"
   }
-  // ,
-  // {
-  //   id: 2,
-  //   x: 300,
-  //   y: 150,
-  //   width: 30,
-  //   height: 30,
-  //   name: "传感器",
-  //   status: "警告",
-  //   description: "温度传感器"
-  // }
 ])
 
 const dialogVisible = ref(false)
@@ -187,7 +211,8 @@ const getHotspotStyle = (device: any) => {
     left: `${device.x}px`,
     top: `${device.y}px`,
     width: `${device.width}px`,
-    height: `${device.height}px`
+    height: `${device.height}px`,
+    backgroundImage: `url("${device.picturePath}")`
   }
 }
 
@@ -265,14 +290,13 @@ const handleDeviceClick = (device: any) => {
   position: absolute;
   cursor: pointer;
   transition: all 0.2s;
-  // border-radius: 50%;
-  background: rgba(255, 0, 0, 0.3);
+  background-size: 100% 100%;
 }
 
-.hotspot:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-}
+// .hotspot:hover {
+//   transform: scale(1.1);
+//   box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+// }
 .top-switch-container {
   display: flex;
   position: absolute;
