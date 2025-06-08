@@ -545,7 +545,7 @@ const getClass = (value: number) => {
 .info-img-div {
   width: 460px;
   height: 240px;
-  background-image: url("../../assets/data-overview/lou.jpg");
+  background-image: url("@/assets/data-overview/lou.jpg");
   background-size: cover;
 }
 .hot-div {

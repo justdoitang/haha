@@ -7,7 +7,8 @@ import vueJsx from "@vitejs/plugin-vue-jsx"
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 import svgLoader from "vite-svg-loader"
 import UnoCSS from "unocss/vite"
-import imagemin from 'vite-plugin-imagemin';
+import imagemin from "vite-plugin-imagemin"
+import viteCompression from "vite-plugin-compression"
 
 /** 配置项文档：https://cn.vitejs.dev/config */
 export default ({ mode }: ConfigEnv): UserConfigExport => {
@@ -102,15 +103,21 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
       }),
       /** UnoCSS */
       UnoCSS(),
-      imagemin({
-        gifsicle: { optimizationLevel: 3 }, // GIF 压缩
-        mozjpeg: { quality: 65 }, // JPEG 压缩
-        optipng: { optimizationLevel: 5 }, // PNG 压缩
-        svgo: {
-          // SVG 优化
-          plugins: [{ name: "removeViewBox" }, { name: "removeEmptyAttrs", active: false }]
-        }
-      })
+      viteCompression({
+        threshold: 1024000, // 对大于 1MB 的文件进行压缩
+        algorithm: "gzip", // 压缩算法（默认 gzip）
+        ext: ".gz", // 生成文件后缀
+        deleteOriginFile: false // 是否删除原始文件（建议保留）
+      }),
+      // imagemin({
+      //   gifsicle: { optimizationLevel: 3 }, // GIF 压缩
+      //   mozjpeg: { quality: 65 }, // JPEG 压缩
+      //   optipng: { optimizationLevel: 5 }, // PNG 压缩
+      //   svgo: {
+      //     // SVG 优化
+      //     plugins: [{ name: "removeViewBox" }, { name: "removeEmptyAttrs", active: false }]
+      //   }
+      // })
     ]
     // /** Vitest 单元测试配置：https://cn.vitest.dev/config */
     // test: {

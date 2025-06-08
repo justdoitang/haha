@@ -1,7 +1,7 @@
 <template>
   <div class="device-container">
     <div class="img-bottom-color">
-      <img src="@/assets/system-monitor/white.png" alt="设备分布图" class="base-image" />
+      <img src="@/assets/system-monitor/blue.png" alt="设备分布图" class="base-image" />
     </div>
     <div
       v-for="device in devices"
@@ -128,15 +128,19 @@
         </div>
       </div>
     </div>
-
-    <el-dialog v-model="dialogVisible" width="60%">
-      <div class="device-container" v-if="currentDevice"></div>
-    </el-dialog>
   </div>
+
+  <el-dialog v-model="dialogVisible" width="60%">
+    <div class="device-container" v-if="currentDevice"></div>
+  </el-dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref, reactive } from "vue"
+import yellow24277 from "@/assets/system-monitor/yellow24277.jpg"
+import red189239 from "@/assets/system-monitor/red189239.jpg"
+import green20789 from "@/assets/system-monitor/green20789.jpg"
+import green193226 from "@/assets/system-monitor/green193226.jpg"
 
 const deviceOneClickStart = ref(true)
 const coolingApproximation = ref(false)
@@ -156,50 +160,50 @@ const legends: Legend[] = reactive([
 
 // 设备数据示例
 const devices = ref([
-  {
-    id: 1,
-    x: 417, // X坐标
-    y: 542, // Y坐标
-    width: 198,
-    height: 62,
-    picturePath: "src/assets/system-monitor/yellow24277.jpg",
-    name: "主电机",
-    status: "正常",
-    description: "2000W交流电机"
-  },
-  {
-    id: 2,
-    x: 397,
-    y: 148,
-    width: 189,
-    height: 239,
-    picturePath: "src/assets/system-monitor/red189239.jpg",
-    name: "传感器",
-    status: "警告",
-    description: "温度传感器"
-  },
-  {
-    id: 3,
-    x: 405, // X坐标
-    y: 660, // Y坐标
-    width: 207,
-    height: 89,
-    picturePath: "src/assets/system-monitor/green20789.jpg",
-    name: "传感器",
-    status: "警告",
-    description: "温度传感器"
-  },
-  {
-    id: 5,
-    x: 574, // X坐标
-    y: 150, // Y坐标
-    width: 193,
-    height: 226,
-    picturePath: "src/assets/system-monitor/green193226.jpg",
-    name: "传感器",
-    status: "警告",
-    description: "温度传感器"
-  }
+  // {
+  //   id: 1,
+  //   x: 417, // X坐标
+  //   y: 542, // Y坐标
+  //   width: 198,
+  //   height: 62,
+  //   picturePath: yellow24277,
+  //   name: "主电机",
+  //   status: "正常",
+  //   description: "2000W交流电机"
+  // },
+  // {
+  //   id: 2,
+  //   x: 397,
+  //   y: 148,
+  //   width: 189,
+  //   height: 239,
+  //   picturePath: red189239,
+  //   name: "传感器",
+  //   status: "警告",
+  //   description: "温度传感器"
+  // },
+  // {
+  //   id: 3,
+  //   x: 405, // X坐标
+  //   y: 660, // Y坐标
+  //   width: 207,
+  //   height: 89,
+  //   picturePath: green20789,
+  //   name: "传感器",
+  //   status: "警告",
+  //   description: "温度传感器"
+  // },
+  // {
+  //   id: 5,
+  //   x: 574, // X坐标
+  //   y: 150, // Y坐标
+  //   width: 193,
+  //   height: 226,
+  //   picturePath: green193226,
+  //   name: "传感器",
+  //   status: "警告",
+  //   description: "温度传感器"
+  // }
 ])
 
 const dialogVisible = ref(false)
@@ -212,7 +216,7 @@ const getHotspotStyle = (device: any) => {
     top: `${device.y}px`,
     width: `${device.width}px`,
     height: `${device.height}px`,
-    backgroundImage: `url("${device.picturePath}")`
+    backgroundImage: `url(${device.picturePath})`
   }
 }
 
@@ -274,7 +278,7 @@ const handleDeviceClick = (device: any) => {
   justify-content: center;
   overflow: hidden;
   min-width: 1680px;
-  height: 820px;
+  height: 825px;
   margin: 10px;
 }
 
@@ -325,8 +329,8 @@ const handleDeviceClick = (device: any) => {
 .left-bottom-container {
   display: flex;
   position: absolute;
-  left: 36px;
-  top: 830px;
+  left: 18px;
+  top: 846px;
   width: 800px;
   height: 36px;
 }
