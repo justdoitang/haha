@@ -36,7 +36,7 @@
     <div class="left-bottom-container">
       <div class="status-legend">
         <div class="legend-item" v-for="(item, index) in legends" :key="index">
-          <span :class="['status-dot', item.color]"></span>
+          <span :class="['status-dot', item.color]" />
           <span class="legend-text">{{ item.label }}</span>
         </div>
       </div>
@@ -90,7 +90,7 @@
           <span style="color: #fbfbfb; margin-right: 8px">能效等级</span>
           <span style="color: #f0d804; margin-left: 8px">一级</span>
         </div>
-        <div class="system-efficiency-ruler"></div>
+        <div class="system-efficiency-ruler" />
       </div>
     </div>
     <div class="right-bottom-container">
@@ -128,11 +128,11 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <el-dialog v-model="dialogVisible" width="60%">
-    <div class="device-container" v-if="currentDevice"></div>
-  </el-dialog>
+    <el-dialog v-model="dialogVisible" width="60%">
+      <div class="device-container" v-if="currentDevice" />
+    </el-dialog>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -199,10 +199,10 @@ const devices = ref([
   //   y: 150, // Y坐标
   //   width: 193,
   //   height: 226,
-  //   picturePath: green193226,
-  //   name: "传感器",
-  //   status: "警告",
-  //   description: "温度传感器"
+  // picturePath: green193226,
+  // name: "传感器",
+  // status: "警告",
+  // description: "温度传感器"
   // }
 ])
 
