@@ -130,7 +130,14 @@
     </div>
 
     <el-dialog v-model="dialogVisible" width="60%">
-      <div class="device-container" v-if="currentDevice" />
+      <template #header="{ titleId, titleClass }">
+        <div class="my-header">
+          <h4 :id="titleId" :class="titleClass">主机-3 水冷离心式-变频</h4>
+        </div>
+      </template>
+      <div class="device-container" v-if="currentDevice">
+        <img src="@/assets/system-monitor/carnier.png" alt="设备分布图" class="dialog-image" />
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -160,17 +167,17 @@ const legends: Legend[] = reactive([
 
 // 设备数据示例
 const devices = ref([
-  // {
-  //   id: 1,
-  //   x: 417, // X坐标
-  //   y: 542, // Y坐标
-  //   width: 198,
-  //   height: 62,
-  //   picturePath: yellow24277,
-  //   name: "主电机",
-  //   status: "正常",
-  //   description: "2000W交流电机"
-  // },
+  {
+    id: 1,
+    x: 417, // X坐标
+    y: 542, // Y坐标
+    width: 198,
+    height: 62,
+    picturePath: yellow24277,
+    name: "主电机",
+    status: "正常",
+    description: "2000W交流电机"
+  }
   // {
   //   id: 2,
   //   x: 397,
@@ -207,6 +214,7 @@ const devices = ref([
 ])
 
 const dialogVisible = ref(false)
+const dialogVisible1 = ref(false)
 const currentDevice = ref(null)
 
 // 计算热点区域样式
@@ -228,6 +236,17 @@ const handleDeviceClick = (device: any) => {
 </script>
 
 <style lang="scss" scoped>
+.my-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: #3e4653;
+}
+.dialog-image {
+  width: 1000px;
+  height: 600px;
+}
 .status-legend {
   display: flex;
   align-items: center;
@@ -269,7 +288,7 @@ const handleDeviceClick = (device: any) => {
   display: flex;
   align-content: center;
   justify-content: center;
-  background-color: black;
+  background-color: #48525e;
 }
 .img-bottom-color {
   background-color: #273341;
