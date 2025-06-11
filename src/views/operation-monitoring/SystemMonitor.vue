@@ -129,7 +129,7 @@
       </div>
     </div>
 
-    <el-dialog v-model="dialogVisible" width="60%">
+    <el-dialog v-model="dialogVisible" width="70%">
       <template #header="{ titleId, titleClass }">
         <div class="my-header">
           <h4 :id="titleId" :class="titleClass">主机-3 水冷离心式-变频</h4>
@@ -138,6 +138,7 @@
       <div class="device-container" v-if="currentDevice">
         <img src="@/assets/system-monitor/carnier.png" alt="设备分布图" class="dialog-image" />
       </div>
+      <div class="demo">dddddd</div>
     </el-dialog>
   </div>
 </template>
@@ -236,6 +237,23 @@ const handleDeviceClick = (device: any) => {
 </script>
 
 <style lang="scss" scoped>
+:deep(.el-dialog) {
+  padding: 0;
+}
+:deep(.el-dialog__header) {
+  padding-bottom: 0;
+  padding-right: 0;
+}
+.demo {
+  display: flex;
+  position: absolute;
+  left: 500px;
+  top: 80px;
+  width: 800px;
+  height: 30px;
+  font-size: 16px;
+  color: red;
+}
 .my-header {
   display: flex;
   flex-direction: row;
