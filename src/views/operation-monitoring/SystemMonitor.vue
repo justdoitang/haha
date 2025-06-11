@@ -36,7 +36,7 @@
     <div class="left-bottom-container">
       <div class="status-legend">
         <div class="legend-item" v-for="(item, index) in legends" :key="index">
-          <span :class="['status-dot', item.color]"></span>
+          <span :class="['status-dot', item.color]" />
           <span class="legend-text">{{ item.label }}</span>
         </div>
       </div>
@@ -90,7 +90,7 @@
           <span style="color: #fbfbfb; margin-right: 8px">能效等级</span>
           <span style="color: #f0d804; margin-left: 8px">一级</span>
         </div>
-        <div class="system-efficiency-ruler"></div>
+        <div class="system-efficiency-ruler" />
       </div>
     </div>
     <div class="right-bottom-container">
@@ -128,11 +128,18 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <el-dialog v-model="dialogVisible" width="60%">
-    <div class="device-container" v-if="currentDevice"></div>
-  </el-dialog>
+    <el-dialog v-model="dialogVisible" width="60%">
+      <template #header="{ titleId, titleClass }">
+        <div class="my-header">
+          <h4 :id="titleId" :class="titleClass">主机-3 水冷离心式-变频</h4>
+        </div>
+      </template>
+      <div class="device-container" v-if="currentDevice">
+        <img src="@/assets/system-monitor/carnier.png" alt="设备分布图" class="dialog-image" />
+      </div>
+    </el-dialog>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -160,17 +167,17 @@ const legends: Legend[] = reactive([
 
 // 设备数据示例
 const devices = ref([
-  // {
-  //   id: 1,
-  //   x: 417, // X坐标
-  //   y: 542, // Y坐标
-  //   width: 198,
-  //   height: 62,
-  //   picturePath: yellow24277,
-  //   name: "主电机",
-  //   status: "正常",
-  //   description: "2000W交流电机"
-  // },
+  {
+    id: 1,
+    x: 417, // X坐标
+    y: 542, // Y坐标
+    width: 198,
+    height: 62,
+    picturePath: yellow24277,
+    name: "主电机",
+    status: "正常",
+    description: "2000W交流电机"
+  }
   // {
   //   id: 2,
   //   x: 397,
@@ -199,14 +206,15 @@ const devices = ref([
   //   y: 150, // Y坐标
   //   width: 193,
   //   height: 226,
-  //   picturePath: green193226,
-  //   name: "传感器",
-  //   status: "警告",
-  //   description: "温度传感器"
+  // picturePath: green193226,
+  // name: "传感器",
+  // status: "警告",
+  // description: "温度传感器"
   // }
 ])
 
 const dialogVisible = ref(false)
+const dialogVisible1 = ref(false)
 const currentDevice = ref(null)
 
 // 计算热点区域样式
@@ -228,6 +236,17 @@ const handleDeviceClick = (device: any) => {
 </script>
 
 <style lang="scss" scoped>
+.my-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: #3e4653;
+}
+.dialog-image {
+  width: 1000px;
+  height: 600px;
+}
 .status-legend {
   display: flex;
   align-items: center;
@@ -269,7 +288,7 @@ const handleDeviceClick = (device: any) => {
   display: flex;
   align-content: center;
   justify-content: center;
-  background-color: black;
+  background-color: #48525e;
 }
 .img-bottom-color {
   background-color: #273341;
