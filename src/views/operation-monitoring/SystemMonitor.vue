@@ -133,19 +133,31 @@
       <template #header="{ titleId, titleClass }">
         <div class="my-header">
           <h4 :id="titleId" :class="titleClass">主机-3 水冷离心式-变频</h4>
+          <div style="padding-right: 50px; padding-top: 60px; color: #fff">
+            <span style="margin-left: 6px">品牌: 约克</span>
+            <span style="margin-left: 6px">功率: 563kW</span>
+            <span style="margin-left: 6px">7/12℃</span>
+            <span style="margin-left: 6px">31/36℃</span>
+          </div>
         </div>
       </template>
       <div class="device-container" v-if="currentDevice">
-        <img src="@/assets/system-monitor/carnier.png" alt="设备分布图" class="dialog-image" />
+        <div class="left-param-container">
+          <div class="left-param-title"><el-icon :size="48"><Cpu /></el-icon><h3 style="padding-left: 12px;">设备参数</h3></div>
+          <div class="left-param-content"></div>
+        </div>
+        <div class="middle-param-container">
+          <img src="@/assets/system-monitor/carnier.png" alt="设备分布图" class="dialog-image" />
+        </div>
+        <div class="right-param-container">youbian</div>
       </div>
-      <div class="demo">dddddd</div>
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, reactive } from "vue"
-import yellow24277 from "@/assets/system-monitor/yellow24277.jpg"
+import yellow24277 from "@/assets/system-monitor/test.png"
 import red189239 from "@/assets/system-monitor/red189239.jpg"
 import green20789 from "@/assets/system-monitor/green20789.jpg"
 import green193226 from "@/assets/system-monitor/green193226.jpg"
@@ -237,6 +249,28 @@ const handleDeviceClick = (device: any) => {
 </script>
 
 <style lang="scss" scoped>
+.left-param-title{
+   display: flex;
+   color: #fbfbfb;
+}
+.left-param-content{
+  width: 220px;
+  height: 500px;
+  padding: 20px;
+  border: 2px  solid #6e6f73;
+}
+.left-param-container {
+  flex: 1;
+  padding: 28px 16px 8px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.middle-param-container {
+  flex: 2;
+}
+.right-param-container {
+  flex: 1;
+}
 :deep(.el-dialog) {
   padding: 0;
 }
@@ -247,8 +281,8 @@ const handleDeviceClick = (device: any) => {
 .demo {
   display: flex;
   position: absolute;
-  left: 500px;
-  top: 80px;
+  left: 200px;
+  top: 160px;
   width: 800px;
   height: 30px;
   font-size: 16px;
@@ -260,6 +294,12 @@ const handleDeviceClick = (device: any) => {
   justify-content: space-between;
   gap: 16px;
   background-color: #3e4653;
+  border: 2px solid #3e6cba;
+  h4 {
+    color: #ffff;
+    padding-left: 20px;
+    font-size: 24px;
+  }
 }
 .dialog-image {
   width: 1000px;
@@ -310,22 +350,22 @@ const handleDeviceClick = (device: any) => {
 }
 .img-bottom-color {
   background-color: #273341;
-  display: flex;
+  //display: flex;
   align-content: center;
   justify-content: center;
   overflow: hidden;
   min-width: 1680px;
-  height: 825px;
+  //height: 825px;
   margin: 10px;
 }
 
 .base-image {
-  display: flex;
+  //display: flex;
   // width: 1900px;
   // height: 820px;
   user-select: none;
-  margin-right: 180px;
-  margin-top: 30px;
+  // margin-right: 180px;
+  // margin-top: 30px;
 }
 .hotspot {
   position: absolute;
