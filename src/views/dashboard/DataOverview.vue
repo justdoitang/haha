@@ -33,7 +33,7 @@
                 <el-icon size="28"><Cpu /></el-icon>
               </div>
               <div class="gateway-panel">
-                <div><span>网关状态</span><span class="time-value-span">ON</span></div>
+                <div><span>控制器状态</span><span class="time-value-span">ON</span></div>
               </div>
             </div>
           </div>
@@ -590,7 +590,7 @@ const getClass = (value: number) => {
 .middler-panel {
   height: 25%;
   display: flex;
-  padding: 10px;
+  padding: 0px 10px 0px 10px;
 }
 .bottom-panel {
   height: 35%;

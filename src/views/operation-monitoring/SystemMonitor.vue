@@ -3,19 +3,39 @@
     <div class="img-bottom-color">
       <img src="@/assets/system-monitor/blue.png" alt="设备分布图" class="base-image" />
     </div>
-    <div
+    <div>
+      <img
+        v-if="isShow == false"
+        src="@/assets/system-monitor/T1_red.png"
+        style="position: absolute; left: 165px; top: 102px"
+        @click="handleDeviceClick(1)"
+      />
+      <img
+        v-if="isShow == true"
+        src="@/assets/system-monitor/T1_green.png"
+        style="position: absolute; left: 165px; top: 102px"
+        @click="handleDeviceClick(1)"
+      />
+    </div>
+    <div>
+      <img
+        src="@/assets/system-monitor/C1_green.png"
+        style="position: absolute; left: 539px; top: 483px"
+        @click="handleDeviceClick(1)"
+      />
+    </div>
+    <!-- <div
       v-for="device in devices"
       :key="device.id"
       class="hotspot"
       :style="getHotspotStyle(device)"
       @click="handleDeviceClick(device)"
-    />
+    /> -->
     <!-- 顶部开关 -->
     <div class="top-switch-container">
-      <div class="top-switch-div">设备一键启动: <el-switch v-model="deviceOneClickStart" /></div>
-      <div class="top-switch-div">冷却逼近度开关: <el-switch v-model="coolingApproximation" /></div>
-      <div class="top-switch-div">自动加减机开关: <el-switch v-model="additiveAndReducer" /></div>
-      <div class="top-switch-div">自动加减塔开关: <el-switch v-model="additiveAndReducerTower" /></div>
+      <div class="top-switch-div">一键启动: <el-switch v-model="deviceOneClickStart" /></div>
+      <div class="top-switch-div">一键停止: <el-switch v-model="coolingApproximation" /></div>
+      <div class="top-switch-div">一键复位: <el-switch v-model="additiveAndReducer" /></div>
     </div>
     <!-- 左上数值 -->
     <div class="left-top-container">
@@ -132,9 +152,9 @@
     <el-dialog v-model="dialogVisible" width="70%">
       <template #header="{ titleId, titleClass }">
         <div class="my-header">
-          <h4 :id="titleId" :class="titleClass">主机-3 水冷离心式-变频</h4>
+          <h4 :id="titleId" :class="titleClass">主机-1</h4>
           <div style="padding-right: 50px; padding-top: 60px; color: #fff">
-            <span style="margin-left: 6px">品牌: 约克</span>
+            <span style="margin-left: 6px">品牌: 开利</span>
             <span style="margin-left: 6px">功率: 563kW</span>
             <span style="margin-left: 6px">7/12℃</span>
             <span style="margin-left: 6px">31/36℃</span>
@@ -143,8 +163,28 @@
       </template>
       <div class="device-container" v-if="currentDevice">
         <div class="left-param-container">
-          <div class="left-param-title"><el-icon :size="48"><Cpu /></el-icon><h3 style="padding-left: 12px;">设备参数</h3></div>
-          <div class="left-param-content"></div>
+          <div class="left-param-title">
+            <el-icon :size="48"><Cpu /></el-icon>
+            <h3 style="padding-left: 12px">设备参数</h3>
+          </div>
+          <div class="left-param-content">
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">主机运行状态：</span>
+              <span class="left-param-content-child-val">正常</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">主机停止状态：</span>
+              <span class="left-param-content-child-val">正常</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">主机远程状态：</span>
+              <span class="left-param-content-child-val">正常</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">主机停机报警状态：</span>
+              <span class="left-param-content-child-val">正常</span>
+            </div>
+          </div>
         </div>
         <div class="middle-param-container">
           <img src="@/assets/system-monitor/carnier.png" alt="设备分布图" class="dialog-image" />
@@ -157,15 +197,17 @@
 
 <script lang="ts" setup>
 import { ref, reactive } from "vue"
-import yellow24277 from "@/assets/system-monitor/test.png"
+import yellow24277 from "@/assets/system-monitor/T1_red.png"
 import red189239 from "@/assets/system-monitor/red189239.jpg"
 import green20789 from "@/assets/system-monitor/green20789.jpg"
 import green193226 from "@/assets/system-monitor/green193226.jpg"
+import { c } from "node_modules/vite/dist/node/types.d-aGj9QkWt"
 
 const deviceOneClickStart = ref(true)
 const coolingApproximation = ref(false)
 const additiveAndReducer = ref(true)
 const additiveAndReducerTower = ref(true)
+const isShow = ref(true)
 
 interface Legend {
   label: string
@@ -184,8 +226,8 @@ const devices = ref([
     id: 1,
     x: 417, // X坐标
     y: 542, // Y坐标
-    width: 198,
-    height: 62,
+    width: 170,
+    height: 210,
     picturePath: yellow24277,
     name: "主电机",
     status: "正常",
@@ -249,24 +291,37 @@ const handleDeviceClick = (device: any) => {
 </script>
 
 <style lang="scss" scoped>
-.left-param-title{
-   display: flex;
-   color: #fbfbfb;
+.left-param-content-child-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fbfbfb;
 }
-.left-param-content{
+.left-param-content-child-val {
+  font-size: 14px;
+  color: #00ff00;
+  padding-left: 30px;
+}
+.left-param-content-child {
+  padding: 4px 4px 12px 4px;
+}
+.left-param-title {
+  display: flex;
+  color: #fbfbfb;
+}
+.left-param-content {
   width: 220px;
   height: 500px;
   padding: 20px;
-  border: 2px  solid #6e6f73;
+  border: 2px solid #6e6f73;
 }
 .left-param-container {
-  flex: 1;
+  flex: 2;
   padding: 28px 16px 8px 28px;
   display: flex;
   flex-direction: column;
 }
 .middle-param-container {
-  flex: 2;
+  flex: 1;
 }
 .right-param-container {
   flex: 1;
@@ -382,7 +437,7 @@ const handleDeviceClick = (device: any) => {
   display: flex;
   position: absolute;
   left: 500px;
-  top: 80px;
+  top: 66px;
   width: 800px;
   height: 30px;
   font-size: 16px;
