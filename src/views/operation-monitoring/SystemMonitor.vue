@@ -18,6 +18,20 @@
       />
     </div>
     <div>
+      <img v-if="isShow == false"
+        src="@/assets/system-monitor/V2_green.png"
+        style="position: absolute; left: 214px; top: 336px"
+        @click="handleDeviceClick(1)"
+      />
+    </div>
+    <div>
+      <img v-if="isShow == true"
+        src="@/assets/system-monitor/V2_red.png"
+        style="position: absolute; left: 214px; top: 336px"
+        @click="handleDeviceClick(1)"
+      />
+    </div>
+    <div>
       <img
         src="@/assets/system-monitor/C1_green.png"
         style="position: absolute; left: 539px; top: 483px"

@@ -8,11 +8,11 @@
       <div class="left-panel">
         <div class="icon">🏠</div>
         <div class="info">
-          <div class="label-t"><span class="lable-span-t">改造前能效</span></div>
+          <div class="label-t"><span class="lable-span-t">设定能效</span></div>
           <div class="label-v"><span class="lable-span-v">4</span></div>
         </div>
         <div class="info">
-          <div class="label-t"><span class="lable-span-t">改造后能效</span></div>
+          <div class="label-t"><span class="lable-span-t">实时能效</span></div>
           <div class="label-v"><span class="lable-span-v">6.68</span></div>
         </div>
         <div class="info">
