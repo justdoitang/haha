@@ -185,95 +185,132 @@
           </div>
           <div class="left-param-content">
             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">主机运行状态：</span>
-              <span class="left-param-content-child-bool">正常</span>
+              <span class="left-param-content-child-name">1#压缩机吸气温度：</span>
+              <span class="left-param-content-child-data">7.5℃</span>
             </div>
             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">主机停止状态：</span>
-              <span class="left-param-content-child-bool">正常</span>
+              <span class="left-param-content-child-name">1#压缩机排气温度：</span>
+              <span class="left-param-content-child-data">7.5℃</span>
             </div>
             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">主机远程状态：</span>
-              <span class="left-param-content-child-bool">正常</span>
+              <span class="left-param-content-child-name">1#蒸发器侧压力(吸气压力)：</span>
+              <span class="left-param-content-child-bool">110.1KPa</span>
             </div>
             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">主机停机报警状态：</span>
-              <span class="left-param-content-child-bool">正常</span>
+              <span class="left-param-content-child-name">1#冷凝器侧压力(排气压力)：</span>
+              <span class="left-param-content-child-bool">133.3KPa</span>
             </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">蒸发器侧进水温度：</span>
-              <span class="left-param-content-child-data">6.8℃</span>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">1#压缩机负荷：</span>
+              <span class="left-param-content-child-bool">233</span>
             </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">蒸发器侧出水温度:</span>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">1#压缩机电流：</span>
+              <span class="left-param-content-child-bool">3A</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">1#压缩机转速：</span>
+              <span class="left-param-content-child-data">222RPM</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">1#压缩机运行时间：</span>
+              <span class="left-param-content-child-data">6.88H</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">1#压缩机电压：</span>
               <span class="left-param-content-child-data">7.5℃</span>
             </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">冷凝器侧进水温度:</span>
-              <span class="left-param-content-child-data">7.5℃</span>
-            </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">冷凝器侧出水温度:</span>
-              <span class="left-param-content-child-data">7.5℃</span>
-            </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">1#压缩机吸气温度:</span>
-              <span class="left-param-content-child-data">7.5℃</span>
-            </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">1#压缩机排气温度:</span>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">1#压缩机功率：</span>
               <span class="left-param-content-child-data">7.5℃</span>
             </div>
           </div>
         </div>
         <div class="middle-param-container">
-          <div class="middle-param-img">
+          <div class="middle-param-img"></div>
+          <div class="left-param-title">
+            <el-icon :size="40" :color="'#3e6cba'"><Checked /></el-icon>
+            <h3 style="padding-left: 12px">设备状态</h3>
+          </div>
+          <div class="middle-param-content">
+            <div class="middle-param-content-child">
+              <span class="left-param-content-child-name">运行状态：</span>
+              <span class="left-param-content-child-bool">正常</span>
+            </div>
+            <div class="middle-param-content-child">
+              <span class="left-param-content-child-name">停止状态：</span>
+              <span class="left-param-content-child-bool">正常</span>
+            </div>
+            <div class="middle-param-content-child">
+              <span class="left-param-content-child-name">远程状态：</span>
+              <span class="left-param-content-child-bool">正常</span>
+            </div>
+            <div class="middle-param-content-child">
+              <span class="left-param-content-child-name">停机报警状态：</span>
+              <span class="left-param-content-child-bool">正常</span>
+            </div>
+            <div class="middle-param-content-child">
+              <span class="left-param-content-child-name">蒸发器侧进水温度：</span>
+              <span class="left-param-content-child-data">6.8℃</span>
+            </div>
+            <div class="middle-param-content-child">
+              <span class="left-param-content-child-name">蒸发器侧出水温度:</span>
+              <span class="left-param-content-child-data">7.5℃</span>
+            </div>
+            <div class="middle-param-content-child">
+              <span class="left-param-content-child-name">冷凝器侧进水温度:</span>
+              <span class="left-param-content-child-data">7.5℃</span>
+            </div>
+            <div class="middle-param-content-child">
+              <span class="left-param-content-child-name">冷凝器侧出水温度:</span>
+              <span class="left-param-content-child-data">7.5℃</span>
+            </div>
           </div>
         </div>
-         <div class="left-param-container">
+        <div class="left-param-container">
           <div class="left-param-title">
             <el-icon :size="40" :color="'#3e6cba'"><Operation /></el-icon>
             <h3 style="padding-left: 12px">设备参数</h3>
           </div>
           <div class="left-param-content">
             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">主机运行状态：</span>
-              <span class="left-param-content-child-bool">正常</span>
+              <span class="left-param-content-child-name">2#压缩机吸气温度：</span>
+              <span class="left-param-content-child-data">7.5℃</span>
             </div>
             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">主机停止状态：</span>
-              <span class="left-param-content-child-bool">正常</span>
+              <span class="left-param-content-child-name">2#压缩机排气温度：</span>
+              <span class="left-param-content-child-data">7.5℃</span>
             </div>
             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">主机远程状态：</span>
-              <span class="left-param-content-child-bool">正常</span>
+              <span class="left-param-content-child-name">2#蒸发器侧压力(吸气压力)：</span>
+              <span class="left-param-content-child-bool">110.1KPa</span>
             </div>
             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">主机停机报警状态：</span>
-              <span class="left-param-content-child-bool">正常</span>
+              <span class="left-param-content-child-name">2#冷凝器侧压力(排气压力)：</span>
+              <span class="left-param-content-child-bool">133.3KPa</span>
             </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">蒸发器侧进水温度：</span>
-              <span class="left-param-content-child-data">6.8℃</span>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">2#压缩机负荷：</span>
+              <span class="left-param-content-child-bool">233</span>
             </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">蒸发器侧出水温度:</span>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">2#压缩机电流：</span>
+              <span class="left-param-content-child-bool">3A</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">2#压缩机转速：</span>
+              <span class="left-param-content-child-data">222RPM</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">2#压缩机运行时间：</span>
+              <span class="left-param-content-child-data">6.88H</span>
+            </div>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">2#压缩机电压：</span>
               <span class="left-param-content-child-data">7.5℃</span>
             </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">冷凝器侧进水温度:</span>
-              <span class="left-param-content-child-data">7.5℃</span>
-            </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">冷凝器侧出水温度:</span>
-              <span class="left-param-content-child-data">7.5℃</span>
-            </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">1#压缩机吸气温度:</span>
-              <span class="left-param-content-child-data">7.5℃</span>
-            </div>
-             <div class="left-param-content-child">
-              <span class="left-param-content-child-name">1#压缩机排气温度:</span>
+            <div class="left-param-content-child">
+              <span class="left-param-content-child-name">2#压缩机功率：</span>
               <span class="left-param-content-child-data">7.5℃</span>
             </div>
           </div>
@@ -379,39 +416,54 @@ const handleDeviceClick = (device: any) => {
 </script>
 
 <style lang="scss" scoped>
-.middle-param-img{
-  width: 600px;
-    height: 350px;
- background-image: url('../../assets/system-monitor/carnier.png');
-    background-size: cover; /* 或者使用 '100% 100%' */
-    background-position: center; /* 确保图片居中 */
-    background-repeat: no-repeat; /* 防止图片重复 */
+.middle-param-content-child {
+  width: calc(50% - 10px);
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  padding-top: 16px;
+  padding-left: 16px;
+}
+.middle-param-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 550px;
+  height: 255px;
+  border: 2px solid #6e6f73;
+}
+.middle-param-img {
+  width: 550px;
+  height: 325px;
+  background-image: url("../../assets/system-monitor/carnier.png");
+  background-size: cover; /* 或者使用 '100% 100%' */
+  background-position: center; /* 确保图片居中 */
+  background-repeat: no-repeat; /* 防止图片重复 */
 }
 .left-param-content-child-name {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: #fbfbfb;
-  width: 130px;
+  width: 210px;
   text-align: right;
 }
 .left-param-content-child-bool {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: #00ff00;
-  padding-left: 30px;
-  width: 120px;
+  padding-left: 24px;
+  width: 100px;
   text-align: center;
 }
 .left-param-content-child-data {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: #5377de;
-  padding-left: 30px;
+  padding-left: 24px;
   width: 120px;
   text-align: center;
 }
 .left-param-content-child {
-  padding: 4px 4px 12px 4px;
+  padding: 20px 4px 12px 0px;
   display: flex;
 }
 .left-param-title {
@@ -419,7 +471,7 @@ const handleDeviceClick = (device: any) => {
   color: #fbfbfb;
 }
 .left-param-content {
-  width: 300px;
+  width: 360px;
   height: 560px;
   padding: 20px;
   border: 2px solid #6e6f73;
