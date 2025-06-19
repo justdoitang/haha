@@ -473,7 +473,7 @@ const handleDeviceClick = (device: any) => {
 .left-param-content {
   width: 360px;
   height: 560px;
-  padding: 20px;
+  padding: 8px;
   border: 2px solid #6e6f73;
 }
 .left-param-container {

@@ -53,7 +53,15 @@
           >
             <el-table-column prop="name" label="设备名称" width="200" align="center">
               <template #default="{ row }">
-                <span class="device-icon">{{ row.icon }}</span> {{ row.name }}
+                <div style="display: flex">
+                  <div style="flex: 1;text-align: right;">
+                    <img
+                      :src="`/src/assets/data-overview/${row.icon}`"
+                      style="width: 20px; height: 20px; vertical-align: middle; margin-right: 12px"
+                    />
+                  </div>
+                  <div style="flex: 1">{{ row.name }}</div>
+                </div>
               </template>
             </el-table-column>
             <el-table-column label="能效值（KW/KW）" align="center">
@@ -205,8 +213,7 @@
                 :key="index"
                 class="color-segment"
                 :style="{ backgroundColor: segment.color, width: segment.width }"
-              >
-              </div>
+              ></div>
             </div>
             <!-- COP 刻度 -->
             <div class="cop-ticks">
@@ -257,7 +264,6 @@ const hotComputedSegments = computed(() => {
   ]
 })
 
-
 // COP 刻度（7.0-3.0）
 const copTicks = computed(() => {
   const min = 3.0,
@@ -306,7 +312,7 @@ const kwrtTicks = computed(() => {
 const deviceData = ref([
   {
     name: "冷水机组",
-    icon: "❄️",
+    icon: "lengshuijizu.png",
     actual: 12.96,
     efficiency: 6.39,
     reference: 5.86,
@@ -314,7 +320,7 @@ const deviceData = ref([
   },
   {
     name: "冷冻水泵",
-    icon: "🔧",
+    icon: "lengdongshuibeng.png",
     actual: 14.8,
     efficiency: 58.61,
     reference: 50.24,
@@ -322,7 +328,7 @@ const deviceData = ref([
   },
   {
     name: "冷却水泵",
-    icon: "💧",
+    icon: "lengqueshuibeng.png",
     actual: 100.05,
     efficiency: 70.31,
     reference: 50.24,
@@ -330,7 +336,7 @@ const deviceData = ref([
   },
   {
     name: "冷却塔",
-    icon: "🏢",
+    icon: "lengqueta.png",
     actual: 45367.16,
     efficiency: 87.91,
     reference: 70.341,
