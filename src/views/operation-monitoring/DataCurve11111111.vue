@@ -1,10 +1,10 @@
-<template>
+<!-- <template> -->
   <!-- <div class="wapper" :ref="refs.wrpapper" @wheel.prevent="scale($event)">
     <div class="box" :ref="refs.box" @mousedown="dragstart($event)">缩放拖拽
 
     </div>
   </div> -->
-  <div class="img-bottom-color" :ref="refs.wrpapper" @wheel.prevent="scale($event)">
+  <!-- <div class="img-bottom-color" :ref="refs.wrpapper" @wheel.prevent="scale($event)">
     <img
       src="@/assets/system-monitor/blue.png"
       alt="设备分布图"
@@ -155,4 +155,4 @@ const rollBtn = (action: "enlarge" | "zoomin") => {
     transform: translate(-50%, -50%);
   }
 }
-</style>
+</style> -->

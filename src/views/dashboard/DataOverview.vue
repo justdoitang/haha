@@ -56,7 +56,7 @@
                 <div style="display: flex">
                   <div style="flex: 1;text-align: right;">
                     <img
-                      :src="`/src/assets/data-overview/${row.icon}`"
+                      :src="`/data-overview/${row.icon}`"
                       style="width: 20px; height: 20px; vertical-align: middle; margin-right: 12px"
                     />
                   </div>
@@ -235,7 +235,8 @@
 </template>
 <script lang="ts" setup>
 import { ref, computed } from "vue"
-import { Place } from "@element-plus/icons-vue"
+import lengshuijizu from '@/assets/data-overview/lengshuijizu.png'
+import icon2 from '@/assets/data-overview/icon2.png'
 
 const props = defineProps({
   currentValue: { type: Number, default: 3.55 },
