@@ -3,43 +3,6 @@
     <div class="img-bottom-color">
       <img src="@/assets/system-monitor/blue.png" alt="设备分布图" class="base-image" />
     </div>
-    <div>
-      <img
-        v-if="isShow == false"
-        src="@/assets/system-monitor/T1_red.png"
-        style="position: absolute; left: 165px; top: 102px"
-        @click="handleDeviceClick(1)"
-      />
-      <img
-        v-if="isShow == true"
-        src="@/assets/system-monitor/T1_green.png"
-        style="position: absolute; left: 165px; top: 102px"
-        @click="handleDeviceClick(1)"
-      />
-    </div>
-    <div>
-      <img
-        v-if="isShow == false"
-        src="@/assets/system-monitor/V2_green.png"
-        style="position: absolute; left: 214px; top: 336px"
-        @click="handleDeviceClick(1)"
-      />
-    </div>
-    <div>
-      <img
-        v-if="isShow == true"
-        src="@/assets/system-monitor/V2_red.png"
-        style="position: absolute; left: 214px; top: 336px"
-        @click="handleDeviceClick(1)"
-      />
-    </div>
-    <div>
-      <img
-        src="@/assets/system-monitor/C1_green.png"
-        style="position: absolute; left: 538px; top: 479px"
-        @click="handleDeviceClick(1)"
-      />
-    </div>
     <!-- <div
       v-for="device in devices"
       :key="device.id"
@@ -164,7 +127,78 @@
         </div>
       </div>
     </div>
-
+    <!-- 设备描述及数据 -->
+    <div style="position: absolute; left: 345px; top: 168px; background-color: black; color: #fff">冷却塔-1</div>
+    <div style="position: absolute; left: 568px; top: 168px; background-color: black; color: #fff">冷却塔-2</div>
+    <!-- 设备状态图 -->
+    <div name="冷却塔-1">
+      <img
+        v-if="isShow == true"
+        src="@/assets/system-monitor/T1_red.png"
+        style="position: absolute; left: 165px; top: 102px"
+        @click="handleDeviceClick(1)"
+      />
+      <img
+        v-if="isShow == false"
+        src="@/assets/system-monitor/T1_green.png"
+        style="position: absolute; left: 165px; top: 102px"
+        @click="handleDeviceClick(1)"
+      />
+    </div>
+    <div name="冷却塔-2">
+      <img
+        v-if="isShow == false"
+        src="@/assets/system-monitor/T2_red.png"
+        style="position: absolute; left: 414px; top: 102px"
+        @click="handleDeviceClick(1)"
+      />
+      <img
+        v-if="isShow == true"
+        src="@/assets/system-monitor/T2_green.png"
+        style="position: absolute; left: 414px; top: 102px"
+        @click="handleDeviceClick(1)"
+      />
+    </div>
+    <div name="冷却塔-1出水阀V2">
+      <img
+        v-if="isShow == false"
+        src="@/assets/system-monitor/V2_green.png"
+        style="position: absolute; left: 214px; top: 336px"
+        @click="handleDeviceClick(1)"
+      />
+      <img
+        v-if="isShow == true"
+        src="@/assets/system-monitor/V2_red.png"
+        style="position: absolute; left: 214px; top: 336px"
+        @click="handleDeviceClick(1)"
+      />
+    </div>
+    <div name="主机-1">
+      <img
+        v-if="isShow == false"
+        src="@/assets/system-monitor/C1_red.png"
+        style="position: absolute; left: 538px; top: 479px"
+        @click="handleDeviceClick(1)"
+      /><img
+        v-if="isShow == true"
+        src="@/assets/system-monitor/C1_green.png"
+        style="position: absolute; left: 538px; top: 479px"
+        @click="handleDeviceClick(1)"
+      />
+    </div>
+    <div name="冷却泵-1">
+      <img
+        v-if="isShow == false"
+        src="@/assets/system-monitor/P4_red.png"
+        style="position: absolute; left: 214px; top: 336px"
+      />
+      <img
+        v-if="isShow == true"
+        src="@/assets/system-monitor/P4_green.png"
+        style="position: absolute; left: 214px; top: 336px"
+      />
+    </div>
+    <!-- 设备详情弹窗 -->
     <el-dialog v-model="dialogVisible" width="70%">
       <template #header="{ titleId, titleClass }">
         <div class="my-header">
@@ -327,6 +361,7 @@ import red189239 from "@/assets/system-monitor/red189239.jpg"
 import green20789 from "@/assets/system-monitor/green20789.jpg"
 import green193226 from "@/assets/system-monitor/green193226.jpg"
 import { c } from "node_modules/vite/dist/node/types.d-aGj9QkWt"
+import { fa } from "element-plus/es/locales.mjs"
 
 const deviceOneClickStart = ref(true)
 const coolingApproximation = ref(false)
