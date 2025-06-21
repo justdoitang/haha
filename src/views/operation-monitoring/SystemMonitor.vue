@@ -190,12 +190,12 @@
       <img
         v-if="isShow == false"
         src="@/assets/system-monitor/P4_red.png"
-        style="position: absolute; left: 214px; top: 336px"
+        style="position: absolute; left: 216px; top: 475px"
       />
       <img
         v-if="isShow == true"
         src="@/assets/system-monitor/P4_green.png"
-        style="position: absolute; left: 214px; top: 336px"
+        style="position: absolute; left: 216px; top: 475px"
       />
     </div>
     <!-- 设备详情弹窗 -->
